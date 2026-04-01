@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PPT</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+KR:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --card: #12121a;
+    --card-hover: #1a1a2e;
+    --accent: #6366f1;
+    --accent-light: #818cf8;
+    --text: #e2e8f0;
+    --dim: #94a3b8;
+    --muted: #64748b;
+    --border: #1e293b;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Noto Sans KR', 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 80px 24px;
+  }
+  h1 {
+    font-size: 36px;
+    font-weight: 800;
+    margin-bottom: 8px;
+    background: linear-gradient(135deg, var(--accent-light), #ec4899);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .subtitle {
+    color: var(--muted);
+    font-size: 15px;
+    margin-bottom: 48px;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 20px;
+    width: 100%;
+    max-width: 800px;
+  }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px;
+    text-decoration: none;
+    color: var(--text);
+    transition: all 0.3s;
+    cursor: pointer;
+  }
+  .card:hover {
+    background: var(--card-hover);
+    border-color: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(99,102,241,0.15);
+  }
+  .card-tag {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--accent-light);
+    margin-bottom: 12px;
+  }
+  .card-title {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .card-desc {
+    font-size: 14px;
+    color: var(--dim);
+    line-height: 1.7;
+  }
+  .card-meta {
+    margin-top: 16px;
+    font-size: 12px;
+    color: var(--muted);
+  }
+</style>
+</head>
+<body>
+  <h1>PPT</h1>
+  <div class="subtitle">발표자료 모음</div>
+  <div class="grid">
+    <a class="card" href="./ai-prompt-management/index.html">
+      <div class="card-tag">Company Tech Talk</div>
+      <div class="card-title">AI 시대, "잘 시키는 사람"이 이긴다</div>
+      <div class="card-desc">프롬프트 관리와 AI 협업의 새로운 패러다임. 전사 발표용.</div>
+      <div class="card-meta">13 slides &middot; 30분</div>
+    </a>
+    <a class="card" href="./idea-manager/index.html">
+      <div class="card-tag">Product</div>
+      <div class="card-title">IM (Idea Manager)</div>
+      <div class="card-desc">아이디어에서 AI 실행까지, 프롬프트 관리 도구 소개.</div>
+      <div class="card-meta">12 slides</div>
+    </a>
+  </div>
+</body>
+</html>
