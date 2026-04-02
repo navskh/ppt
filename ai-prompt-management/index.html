@@ -1890,6 +1890,7 @@
     newSlide.classList.remove('prev');
 
     currentSlide = index;
+    newSlide.scrollTop = 0;
 
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
