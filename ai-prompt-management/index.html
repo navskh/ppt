@@ -82,6 +82,10 @@
     justify-content: space-between;
     padding: 0 32px;
     z-index: 100;
+    transition: right 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .nav-bar.editor-open {
+    right: 420px;
   }
 
   .nav-dots {
@@ -873,35 +877,45 @@
   .demo-prompt-comment { color: #565f89; }
   .demo-prompt-highlight { color: #7aa2f7; }
 
-  /* Script Editor Panel */
+  /* Script Editor Panel — side panel */
   .script-editor-overlay {
     position: fixed;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: rgba(0,0,0,0.6);
-    backdrop-filter: blur(4px);
-    z-index: 999;
-    display: none;
-    justify-content: center;
-    align-items: center;
-  }
-  .script-editor-overlay.open { display: flex; }
-
-  .script-editor {
-    width: 720px;
-    max-height: 80vh;
+    top: 0; right: 0; bottom: 0;
+    width: 420px;
     background: #1a1a2e;
-    border: 1px solid var(--border);
-    border-radius: 16px;
+    border-left: 1px solid var(--border);
+    z-index: 999;
     display: flex;
     flex-direction: column;
-    box-shadow: 0 24px 80px rgba(0,0,0,0.5);
+    box-shadow: -4px 0 24px rgba(0,0,0,0.4);
+    transform: translateX(100%);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    pointer-events: none;
+  }
+  .script-editor-overlay.open {
+    transform: translateX(0);
+    pointer-events: auto;
+  }
+
+  /* slides-wrapper가 에디터 열릴 때 줄어듦 */
+  .slides-wrapper.editor-open {
+    width: calc(100vw - 420px);
+    transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .script-editor {
+    width: 100%;
+    height: 100%;
+    background: #1a1a2e;
+    display: flex;
+    flex-direction: column;
   }
 
   .script-editor-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 16px 24px;
+    padding: 14px 16px;
     border-bottom: 1px solid var(--border);
   }
 
@@ -933,7 +947,7 @@
   .script-editor-nav button:hover { background: var(--bg-card-hover); }
 
   .script-editor-body {
-    padding: 16px 24px;
+    padding: 12px 16px;
     flex: 1;
     overflow: hidden;
     display: flex;
@@ -943,7 +957,7 @@
   .script-editor-body textarea {
     width: 100%;
     flex: 1;
-    min-height: 360px;
+    min-height: 0;
     background: #0d1117;
     border: 1px solid #21262d;
     border-radius: 8px;
@@ -961,14 +975,16 @@
 
   .script-editor-footer {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
-    padding: 12px 24px;
+    padding: 12px 16px;
     border-top: 1px solid var(--border);
+    gap: 8px;
   }
 
   .script-editor-footer .hint {
-    font-size: 12px;
+    font-size: 11px;
     color: var(--text-muted);
   }
 
@@ -1885,6 +1901,8 @@
   function toggleEditor() {
     editorOpen = !editorOpen;
     overlay.classList.toggle('open', editorOpen);
+    document.querySelector('.slides-wrapper').classList.toggle('editor-open', editorOpen);
+    document.querySelector('.nav-bar').classList.toggle('editor-open', editorOpen);
     if (editorOpen) loadEditor(currentSlide);
   }
 
