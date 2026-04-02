@@ -1019,6 +1019,116 @@
     pointer-events: none;
   }
   .save-toast.show { opacity: 1; transform: translateY(0); }
+
+  /* ═══ Ambient Animations ═══ */
+
+  @keyframes drift {
+    0%, 100% { transform: translate(0, 0); }
+    33% { transform: translate(30px, -25px); }
+    66% { transform: translate(-20px, 15px); }
+  }
+
+  .bg-glow { animation: drift 25s ease-in-out infinite; }
+  .bg-glow.pink { animation-duration: 30s; animation-delay: -7s; }
+  .bg-glow.cyan { animation-duration: 22s; animation-delay: -12s; }
+  .bg-glow.orange { animation-duration: 28s; animation-delay: -4s; }
+
+  @keyframes shimmer {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+
+  .slide-title { background-size: 200% 200%; animation: shimmer 8s ease-in-out infinite; }
+
+  @keyframes borderGlow {
+    0%, 100% { border-left-color: var(--accent); box-shadow: none; }
+    50% { border-left-color: var(--accent-light); box-shadow: -2px 0 24px rgba(99,102,241,0.15); }
+  }
+
+  .slide.active .quote-block { animation: borderGlow 4s ease-in-out infinite; }
+
+  @keyframes termGlow {
+    0%, 100% { box-shadow: 0 0 0 rgba(122,162,247,0); }
+    50% { box-shadow: 0 0 40px rgba(122,162,247,0.08); }
+  }
+
+  .slide.active .terminal { animation: termGlow 5s ease-in-out infinite; }
+
+  @keyframes orbGlow {
+    0%, 100% { box-shadow: 0 0 0 transparent; filter: brightness(1); }
+    50% { box-shadow: 0 0 12px rgba(255,255,255,0.12); filter: brightness(1.2); }
+  }
+
+  .slide.active .circle-orb { animation: orbGlow 3s ease-in-out infinite; }
+  .slide.active .circle-orb:nth-child(2) { animation-delay: 0.4s; }
+  .slide.active .circle-orb:nth-child(3) { animation-delay: 0.8s; }
+  .slide.active .circle-orb:nth-child(4) { animation-delay: 1.2s; }
+  .slide.active .circle-orb:nth-child(5) { animation-delay: 1.6s; }
+  .slide.active .circle-orb:nth-child(6) { animation-delay: 2.0s; }
+  .slide.active .circle-orb:nth-child(7) { animation-delay: 2.4s; }
+
+  @keyframes arrowPulse {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; }
+  }
+
+  .slide.active .flow-arrow { animation: arrowPulse 2s ease-in-out infinite; }
+
+  @keyframes badgeFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+  }
+
+  .magic-words > div:nth-child(1) { animation: badgeFloat 3s ease-in-out infinite; }
+  .magic-words > div:nth-child(2) { animation: badgeFloat 3.5s ease-in-out infinite 0.5s; }
+  .magic-words > div:nth-child(3) { animation: badgeFloat 4s ease-in-out infinite 1s; }
+
+  @keyframes navGlow {
+    0%, 100% { box-shadow: 0 0 8px var(--accent-glow); }
+    50% { box-shadow: 0 0 16px var(--accent-glow), 0 0 4px var(--accent); }
+  }
+
+  .nav-dot.active { animation: navGlow 2s ease-in-out infinite; }
+
+  /* ═══ Entry Animations ═══ */
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .slide.active .card { animation: fadeIn 0.5s ease-out both; }
+  .slide.active .card:nth-child(2) { animation-delay: 0.1s; }
+  .slide.active .card:nth-child(3) { animation-delay: 0.2s; }
+
+  .slide.active .feature-item { animation: fadeInUp 0.4s ease-out both; }
+  .slide.active .feature-item:nth-child(2) { animation-delay: 0.05s; }
+  .slide.active .feature-item:nth-child(3) { animation-delay: 0.1s; }
+  .slide.active .feature-item:nth-child(4) { animation-delay: 0.15s; }
+  .slide.active .feature-item:nth-child(5) { animation-delay: 0.2s; }
+  .slide.active .feature-item:nth-child(6) { animation-delay: 0.25s; }
+  .slide.active .feature-item:nth-child(7) { animation-delay: 0.3s; }
+  .slide.active .feature-item:nth-child(8) { animation-delay: 0.35s; }
+
+  .slide.active .summary-item { animation: fadeInUp 0.5s ease-out both; }
+  .slide.active .summary-item:nth-child(2) { animation-delay: 0.15s; }
+  .slide.active .summary-item:nth-child(3) { animation-delay: 0.3s; }
+
+  .slide.active .compare-col { animation: fadeInUp 0.6s ease-out both; }
+  .slide.active .compare-col:nth-child(2) { animation-delay: 0.2s; }
+
+  /* Demo mockup subtle breathing */
+  @keyframes demoBreathe {
+    0%, 100% { box-shadow: 0 24px 80px rgba(0,0,0,0.6); }
+    50% { box-shadow: 0 24px 80px rgba(0,0,0,0.6), 0 0 60px rgba(99,102,241,0.05); }
+  }
+
+  .slide.active .demo-frame { animation: demoBreathe 6s ease-in-out infinite; }
 </style>
 </head>
 <body>
@@ -1178,7 +1288,7 @@
         </div>
       </div>
     </div>
-    <div style="margin-top: 28px; display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;">
+    <div class="magic-words" style="margin-top: 28px; display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;">
       <div style="padding: 10px 20px; background: rgba(245,158,11,0.1); border: 1px solid rgba(245,158,11,0.2); border-radius: 10px; font-size: 14px; color: var(--orange);">
         &#10024; "Think step by step"
       </div>
