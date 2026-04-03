@@ -68,6 +68,19 @@
     transform: translateX(-60px);
   }
 
+  /* Reveal step animation */
+  .reveal-step {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    pointer-events: none;
+  }
+  .reveal-step.revealed {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
   /* Navigation */
   .nav-bar {
     position: fixed;
@@ -220,6 +233,45 @@
   }
 
   .card:hover::before { opacity: 1; }
+
+  /* Card pulse border animation */
+  @keyframes cardPulse1 {
+    0%, 100% { border-color: var(--border); box-shadow: none; }
+    30%, 70% { border-color: var(--pink); box-shadow: 0 0 20px rgba(236,72,153,0.25); }
+  }
+  @keyframes cardPulse2 {
+    0%, 100% { border-color: var(--border); box-shadow: none; }
+    30%, 70% { border-color: var(--orange); box-shadow: 0 0 20px rgba(245,158,11,0.25); }
+  }
+  @keyframes cardPulse3 {
+    0%, 100% { border-color: var(--border); box-shadow: none; }
+    30%, 70% { border-color: var(--green); box-shadow: 0 0 20px rgba(34,197,94,0.25); }
+  }
+  .slide.active .card-pulse-1 { animation: fadeIn 0.5s ease-out both, cardPulse1 4.5s 0.5s ease-in-out infinite; }
+  .slide.active .card-pulse-2 { animation: fadeIn 0.5s 0.1s ease-out both, cardPulse2 4.5s 2s ease-in-out infinite; }
+  .slide.active .card-pulse-3 { animation: fadeIn 0.5s 0.2s ease-out both, cardPulse3 4.5s 3.5s ease-in-out infinite; }
+
+  /* Flow item pulse */
+  @keyframes flowPulse1 {
+    0%, 100% { border-color: var(--border); box-shadow: none; }
+    30%, 70% { border-color: var(--accent-light); box-shadow: 0 0 16px rgba(99,102,241,0.3); }
+  }
+  @keyframes flowPulse2 {
+    0%, 100% { border-color: var(--border); box-shadow: none; }
+    30%, 70% { border-color: var(--cyan); box-shadow: 0 0 16px rgba(6,182,212,0.3); }
+  }
+  @keyframes flowPulse3 {
+    0%, 100% { border-color: var(--border); box-shadow: none; }
+    30%, 70% { border-color: var(--pink); box-shadow: 0 0 16px rgba(236,72,153,0.3); }
+  }
+  @keyframes flowPulse4 {
+    0%, 100% { border-color: var(--border); box-shadow: none; }
+    30%, 70% { border-color: var(--green); box-shadow: 0 0 16px rgba(34,197,94,0.3); }
+  }
+  .slide.active .flow-pulse-1 { animation: flowPulse1 6s ease-in-out infinite; }
+  .slide.active .flow-pulse-2 { animation: flowPulse2 6s 1.5s ease-in-out infinite; }
+  .slide.active .flow-pulse-3 { animation: flowPulse3 6s 3s ease-in-out infinite; }
+  .slide.active .flow-pulse-4 { animation: flowPulse4 6s 4.5s ease-in-out infinite; }
 
   .card-icon { font-size: 36px; margin-bottom: 16px; display: block; }
   .card-title { font-size: 20px; font-weight: 700; margin-bottom: 10px; color: #fff; }
@@ -1070,18 +1122,18 @@
 
   .slide.active .terminal { animation: termGlow 5s ease-in-out infinite; }
 
-  @keyframes orbGlow {
-    0%, 100% { box-shadow: 0 0 0 transparent; filter: brightness(1); }
-    50% { box-shadow: 0 0 12px rgba(255,255,255,0.12); filter: brightness(1.2); }
+  @keyframes orbDrift {
+    0%, 100% {
+      transform: translate(0, 0);
+      box-shadow: 0 0 0 0 var(--orb-color, rgba(255,255,255,0.2));
+    }
+    50% {
+      transform: translate(var(--dx, 0px), var(--dy, 0px));
+      box-shadow: 0 0 12px 5px var(--orb-color, rgba(255,255,255,0.12));
+    }
   }
 
-  .slide.active .circle-orb { animation: orbGlow 3s ease-in-out infinite; }
-  .slide.active .circle-orb:nth-child(2) { animation-delay: 0.4s; }
-  .slide.active .circle-orb:nth-child(3) { animation-delay: 0.8s; }
-  .slide.active .circle-orb:nth-child(4) { animation-delay: 1.2s; }
-  .slide.active .circle-orb:nth-child(5) { animation-delay: 1.6s; }
-  .slide.active .circle-orb:nth-child(6) { animation-delay: 2.0s; }
-  .slide.active .circle-orb:nth-child(7) { animation-delay: 2.4s; }
+  .slide.active .circle-orb { animation: orbDrift 3s ease-in-out infinite; }
 
   @keyframes arrowPulse {
     0%, 100% { opacity: 0.5; }
@@ -1118,9 +1170,9 @@
     to { opacity: 1; transform: translateY(0); }
   }
 
-  .slide.active .card { animation: fadeIn 0.5s ease-out both; }
-  .slide.active .card:nth-child(2) { animation-delay: 0.1s; }
-  .slide.active .card:nth-child(3) { animation-delay: 0.2s; }
+  .slide.active .card:not([class*="card-pulse-"]) { animation: fadeIn 0.5s ease-out both; }
+  .slide.active .card:not([class*="card-pulse-"]):nth-child(2) { animation-delay: 0.1s; }
+  .slide.active .card:not([class*="card-pulse-"]):nth-child(3) { animation-delay: 0.2s; }
 
   .slide.active .feature-item { animation: fadeInUp 0.4s ease-out both; }
   .slide.active .feature-item:nth-child(2) { animation-delay: 0.05s; }
@@ -1206,20 +1258,15 @@
       <h2>"AI가 개발자를 대체할 것 같아요?"</h2>
       <p>요즘 이 질문은 어딜 가나 따라옵니다</p>
     </div>
-    <div style="max-width: 800px; width: 100%; margin-bottom: 36px;">
-      <div style="display: flex; gap: 24px; margin-bottom: 32px;">
-        <div style="flex: 1; padding: 24px; background: var(--bg-card); border: 1px solid rgba(148,163,184,0.15); border-radius: 16px;">
-          <div style="font-size: 28px; margin-bottom: 12px;">😅</div>
-          <div style="font-size: 17px; color: #fff; font-weight: 600; margin-bottom: 8px; line-height: 1.6;">"개발자 이제 다 망했으니,<br>다 같이 치킨집이나 차리자"</div>
-          <div style="font-size: 14px; color: var(--text-muted);">— 농담 반, 진담 반</div>
-        </div>
-        <div style="flex: 1; padding: 24px; background: var(--bg-card); border: 1px solid rgba(148,163,184,0.15); border-radius: 16px;">
-          <div style="font-size: 28px; margin-bottom: 12px;">🤔</div>
-          <div style="font-size: 15px; color: var(--text-dim); line-height: 1.8;">1년 전만 해도<br>"AI는 강력한 <span class="highlight-green">협업 도구</span>일 뿐"<br>절대 대체는 못 한다고 했는데...</div>
-        </div>
+    <div class="reveal-step" style="max-width: 800px; width: 100%; margin-bottom: 36px;">
+      <div style="padding: 28px 32px; background: var(--bg-card); border: 1px solid rgba(148,163,184,0.15); border-radius: 16px;">
+        <div style="font-size: 28px; margin-bottom: 12px;">😅</div>
+        <div style="font-size: 18px; color: #fff; font-weight: 600; margin-bottom: 10px; line-height: 1.6;">"개발자 이제 다 망했으니, 다 같이 치킨집이나 차리자"</div>
+        <div style="font-size: 15px; color: var(--text-dim); line-height: 1.8; margin-top: 12px;">웃기면서도 씁쓸한 건,<br>1년 전만 해도 "AI는 강력한 <span class="highlight-green">협업 도구</span>일 뿐"이라고 했다는 점입니다.<br>절대 대체는 못 한다고도 했고요.</div>
+        <div style="font-size: 14px; color: var(--text-muted); margin-top: 12px;">— 농담 반, 진담 반</div>
       </div>
     </div>
-    <div style="display: flex; gap: 32px; max-width: 800px; width: 100%;">
+    <div class="reveal-step" style="display: flex; gap: 32px; max-width: 800px; width: 100%;">
       <div style="flex: 1; padding: 28px; background: var(--bg-card); border: 1px solid rgba(148,163,184,0.2); border-radius: 16px; text-align: center;">
         <div style="font-size: 40px; margin-bottom: 12px;">&#128187;</div>
         <div style="font-size: 14px; font-weight: 600; letter-spacing: 1px; color: var(--text-muted); margin-bottom: 8px;">1년 전</div>
@@ -1273,7 +1320,7 @@
     <div class="section-header">
       <div class="slide-tag">The Paradox</div>
       <h2>AI가 못 하는 것</h2>
-      <p>매일 AI와 같이 일하면서 발견한 것</p>
+      <p>시키지 않은 일을 AI는 못 합니다</p>
     </div>
     <div class="terminal" style="margin-bottom: 36px;">
       <div class="terminal-header">
@@ -1296,7 +1343,7 @@
       <div style="font-size: 17px; color: var(--text-dim); line-height: 1.9;">
         시키면 <span class="highlight-green">진짜 잘합니다</span>. 리팩토링, 테스트 코드, 보고서 초안, 데이터 분석까지.<br>
         하지만 <span class="highlight-pink">시키지 않으면</span> 커서만 깜빡이며 가만히 있죠.<br><br>
-        <strong style="color: #fff;">오직 사람만이 AI에게 정확한 니즈와 비즈니스 로직을 줄 수 있습니다.</strong><br>
+        <span style="color: var(--accent-light); font-size: 19px; font-weight: 700;">오직 사람만이 AI에게 정확한 니즈와 비즈니스 로직을 줄 수 있습니다.</span><br>
         어떤 고객이 무엇을 필요로 하는지 파악하는 건, 결국 사람의 일이에요.
       </div>
     </div>
@@ -1425,16 +1472,16 @@
         <strong style="color: #fff;">나는 코딩하는 사람이 아니라, 프롬프트 만드는 사람이 되어가고 있구나.</strong>
       </div>
     </div>
-    <div class="cards-grid" style="max-width: 900px; grid-template-columns: repeat(3, 1fr);">
-      <div class="card">
-        <span class="card-icon">&#128196;</span>
-        <div class="card-title">텍스트 파일</div>
+    <div class="cards-grid card-pulse-group" style="max-width: 900px; grid-template-columns: repeat(3, 1fr);">
+      <div class="card card-pulse-1">
+        <span class="card-icon" style="font-size: 36px;">&#128187;</span>
+        <div class="card-title">VSCode</div>
         <div class="card-desc">
           폴더별로 정리했지만<br>
           <span style="color: var(--red);">실행/대기 구분 불가</span>
         </div>
       </div>
-      <div class="card">
+      <div class="card card-pulse-2">
         <span class="card-icon">&#128221;</span>
         <div class="card-title">Notion</div>
         <div class="card-desc">
@@ -1442,7 +1489,7 @@
           <span style="color: var(--red);">복붙 필요, 흐름 끊김</span>
         </div>
       </div>
-      <div class="card">
+      <div class="card card-pulse-3">
         <span class="card-icon">&#129300;</span>
         <div class="card-title">필요한 것</div>
         <div class="card-desc">
@@ -1472,25 +1519,25 @@
       </div>
     </div>
     <div class="flow">
-      <div class="flow-item">
+      <div class="flow-item flow-pulse-1">
         <span class="flow-emoji">&#128173;</span>
         <span class="flow-label">Brainstorming</span>
         <div class="flow-sub">머릿속 아이디어</div>
       </div>
       <span class="flow-arrow">&#10230;</span>
-      <div class="flow-item">
+      <div class="flow-item flow-pulse-2">
         <span class="flow-emoji">&#9998;</span>
         <span class="flow-label">Task</span>
         <div class="flow-sub">실행 단위로 분해</div>
       </div>
       <span class="flow-arrow">&#10230;</span>
-      <div class="flow-item">
+      <div class="flow-item flow-pulse-3">
         <span class="flow-emoji">&#128196;</span>
         <span class="flow-label">Prompt</span>
         <div class="flow-sub">AI 지시문 작성</div>
       </div>
       <span class="flow-arrow">&#10230;</span>
-      <div class="flow-item" style="border-color: var(--green);">
+      <div class="flow-item flow-pulse-4">
         <span class="flow-emoji">&#129302;</span>
         <span class="flow-label">AI Execution</span>
         <div class="flow-sub">자동/수동 실행</div>
@@ -1751,9 +1798,9 @@
     <div class="circles-wrap">
       <div class="circle-person">
         <div class="circle-orbs">
-          <div class="circle-orb" style="background: rgba(99,102,241,0.15); border-color: var(--accent);">&#9883;</div>
-          <div class="circle-orb" style="background: rgba(236,72,153,0.15); border-color: var(--pink);">&#9883;</div>
-          <div class="circle-orb" style="background: rgba(34,197,94,0.15); border-color: var(--green);">&#9883;</div>
+          <div class="circle-orb" style="background: rgba(99,102,241,0.15); border-color: var(--accent); --orb-color: rgba(99,102,241,0.35); --dx: -8px; --dy: -8px;">&#9883;</div>
+          <div class="circle-orb" style="background: rgba(236,72,153,0.15); border-color: var(--pink); --orb-color: rgba(236,72,153,0.35); --dx: 0px; --dy: -10px;">&#9883;</div>
+          <div class="circle-orb" style="background: rgba(34,197,94,0.15); border-color: var(--green); --orb-color: rgba(34,197,94,0.35); --dx: 8px; --dy: -8px;">&#9883;</div>
         </div>
         <div class="circle-label">3 Circle</div>
         <div class="circle-sub">동시에 3개 프로젝트</div>
@@ -1762,13 +1809,13 @@
       <div style="width: 1px; height: 120px; background: var(--border);"></div>
       <div class="circle-person">
         <div class="circle-orbs">
-          <div class="circle-orb" style="background: rgba(99,102,241,0.15); border-color: var(--accent);">&#9883;</div>
-          <div class="circle-orb" style="background: rgba(236,72,153,0.15); border-color: var(--pink);">&#9883;</div>
-          <div class="circle-orb" style="background: rgba(34,197,94,0.15); border-color: var(--green);">&#9883;</div>
-          <div class="circle-orb" style="background: rgba(6,182,212,0.15); border-color: var(--cyan);">&#9883;</div>
-          <div class="circle-orb" style="background: rgba(245,158,11,0.15); border-color: var(--orange);">&#9883;</div>
-          <div class="circle-orb" style="background: rgba(239,68,68,0.15); border-color: var(--red);">&#9883;</div>
-          <div class="circle-orb" style="background: rgba(168,85,247,0.15); border-color: #a855f7;">&#9883;</div>
+          <div class="circle-orb" style="background: rgba(99,102,241,0.15); border-color: var(--accent); --orb-color: rgba(99,102,241,0.35); --dx: -8px; --dy: -8px;">&#9883;</div>
+          <div class="circle-orb" style="background: rgba(236,72,153,0.15); border-color: var(--pink); --orb-color: rgba(236,72,153,0.35); --dx: 0px; --dy: -10px;">&#9883;</div>
+          <div class="circle-orb" style="background: rgba(34,197,94,0.15); border-color: var(--green); --orb-color: rgba(34,197,94,0.35); --dx: 8px; --dy: -8px;">&#9883;</div>
+          <div class="circle-orb" style="background: rgba(6,182,212,0.15); border-color: var(--cyan); --orb-color: rgba(6,182,212,0.35); --dx: -10px; --dy: 0px;">&#9883;</div>
+          <div class="circle-orb" style="background: rgba(245,158,11,0.15); border-color: var(--orange); --orb-color: rgba(245,158,11,0.35); --dx: 0px; --dy: 0px;">&#9883;</div>
+          <div class="circle-orb" style="background: rgba(239,68,68,0.15); border-color: var(--red); --orb-color: rgba(239,68,68,0.35); --dx: 10px; --dy: 0px;">&#9883;</div>
+          <div class="circle-orb" style="background: rgba(168,85,247,0.15); border-color: #a855f7; --orb-color: rgba(168,85,247,0.35); --dx: 0px; --dy: 10px;">&#9883;</div>
         </div>
         <div class="circle-label">7 Circle</div>
         <div class="circle-sub">동시에 7개 프로젝트</div>
@@ -2031,6 +2078,7 @@
     const newSlide = slides[index];
 
     oldSlide.classList.remove('active');
+    oldSlide.querySelectorAll('.reveal-step').forEach(s => s.classList.remove('revealed'));
     if (direction > 0) {
       oldSlide.classList.add('prev');
     } else {
@@ -2043,6 +2091,7 @@
     newSlide.classList.remove('prev');
 
     currentSlide = index;
+    localStorage.setItem('ppt-last-slide', index);
     newSlide.scrollTop = 0;
 
     requestAnimationFrame(() => {
@@ -2059,6 +2108,22 @@
   }
 
   function navigate(dir) {
+    if (dir > 0) {
+      const currentEl = slides[currentSlide];
+      const steps = currentEl.querySelectorAll('.reveal-step:not(.revealed)');
+      if (steps.length > 0) {
+        steps[0].classList.add('revealed');
+        return;
+      }
+    }
+    if (dir < 0) {
+      const currentEl = slides[currentSlide];
+      const revealedSteps = currentEl.querySelectorAll('.reveal-step.revealed');
+      if (revealedSteps.length > 0) {
+        revealedSteps[revealedSteps.length - 1].classList.remove('revealed');
+        return;
+      }
+    }
     goToSlide(currentSlide + dir);
   }
 
@@ -2093,8 +2158,15 @@
     if (Math.abs(diff) > 50) navigate(diff > 0 ? 1 : -1);
   });
 
+  const savedSlide = parseInt(localStorage.getItem('ppt-last-slide'));
+  if (savedSlide > 0 && savedSlide < totalSlides) {
+    slides[0].classList.remove('active');
+    slides[0].classList.add('prev');
+    slides[savedSlide].classList.add('active');
+    currentSlide = savedSlide;
+  }
   updateUI();
-  logScript(0);
+  logScript(currentSlide);
 </script>
 
 </body>
