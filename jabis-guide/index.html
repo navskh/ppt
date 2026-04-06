@@ -26,6 +26,13 @@
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: rgba(176, 188, 208, 0.25); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: rgba(176, 188, 208, 0.4); }
+  * { scrollbar-width: thin; scrollbar-color: rgba(176, 188, 208, 0.25) transparent; }
+
   body {
     font-family: 'Noto Sans KR', 'Inter', sans-serif;
     background: var(--bg-dark);
