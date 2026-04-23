@@ -1552,8 +1552,91 @@
     </div>
   </div>
 
-  <!-- Slide 8: 시연 화면 -->
+  <!-- Slide 8: 태스크 상태 관리 -->
   <div class="slide" data-index="8">
+    <div class="section-header">
+      <div class="slide-tag">Task Management</div>
+      <h2>6단계 상태 관리</h2>
+      <p>프롬프트의 상태를 추적하고, AI가 알아서 대기열에서 꺼내 작업합니다</p>
+    </div>
+    <div class="flow" style="margin-bottom: 8px;">
+      <div style="padding: 12px 20px; border-radius: 12px; background: rgba(148,163,184,0.1); border: 1px solid rgba(148,163,184,0.2); font-size: 15px; font-weight: 600;">&#128161; Idea</div>
+      <span class="flow-arrow">&#10230;</span>
+      <div style="padding: 12px 20px; border-radius: 12px; background: rgba(99,102,241,0.1); border: 1px solid rgba(99,102,241,0.2); font-size: 15px; font-weight: 600; color: var(--accent-light);">&#9999;&#65039; Writing</div>
+      <span class="flow-arrow">&#10230;</span>
+      <div style="padding: 12px 20px; border-radius: 12px; background: rgba(6,182,212,0.1); border: 1px solid rgba(6,182,212,0.2); font-size: 15px; font-weight: 600; color: var(--cyan);">&#128640; Submitted</div>
+      <span class="flow-arrow">&#10230;</span>
+      <div style="padding: 12px 20px; border-radius: 12px; background: rgba(245,158,11,0.1); border: 1px solid rgba(245,158,11,0.2); font-size: 15px; font-weight: 600; color: var(--orange);">&#129514; Testing</div>
+      <span class="flow-arrow">&#10230;</span>
+      <div style="padding: 12px 20px; border-radius: 12px; background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.2); font-size: 15px; font-weight: 600; color: var(--green);">&#9989; Done</div>
+    </div>
+    <div style="margin-bottom: 40px;">
+      <div style="padding: 12px 20px; border-radius: 12px; background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.2); font-size: 15px; font-weight: 600; color: var(--red); display: inline-block;">&#128308; Problem</div>
+    </div>
+    <div class="cards-grid" style="max-width: 900px; grid-template-columns: 1fr 1fr;">
+      <div class="card">
+        <span class="card-icon">&#128064;</span>
+        <div class="card-title">Watch 모드</div>
+        <div class="card-desc" style="line-height: 1.9;">
+          <strong style="color:#fff;">Submitted</strong> 상태 태스크를 자동 감지<br>
+          AI CLI가 프롬프트를 읽고 자동 실행<br>
+          완료되면 상태를 <strong style="color:var(--green);">Done</strong>으로 변경
+        </div>
+      </div>
+      <div class="card">
+        <span class="card-icon">&#128268;</span>
+        <div class="card-title">MCP 서버</div>
+        <div class="card-desc" style="line-height: 1.9;">
+          외부 AI 에이전트가 태스크 목록 조회<br>
+          대기 중인 프롬프트를 직접 꺼내 실행<br>
+          하나하나 "이거 해줘" 할 필요 없음
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 9: 핵심 기능들 -->
+  <div class="slide" data-index="9">
+    <div class="bg-glow cyan"></div>
+    <div class="section-header">
+      <div class="slide-tag">Features</div>
+      <h2>핵심 기능</h2>
+    </div>
+    <div class="feature-list">
+      <div class="feature-item">
+        <div class="feature-check">&#10003;</div>
+        <span><strong>3-패널 워크스페이스</strong> &mdash; 브레인스토밍, 태스크, 프롬프트를 한 화면에서</span>
+      </div>
+      <div class="feature-item">
+        <div class="feature-check">&#10003;</div>
+        <span><strong>멀티 에이전트</strong> &mdash; Claude, Gemini, Codex 등 태스크 성격에 따라 선택</span>
+      </div>
+      <div class="feature-item">
+        <div class="feature-check">&#10003;</div>
+        <span><strong>AI 채팅</strong> &mdash; 태스크별로 AI와 대화하면서 방향 잡기</span>
+      </div>
+      <div class="feature-item">
+        <div class="feature-check">&#10003;</div>
+        <span><strong>Git 동기화</strong> &mdash; 집 PC와 회사 PC에서 같은 데이터를 쓸 수 있어요</span>
+      </div>
+    </div>
+    <div style="margin-top: 16px; max-width: 700px; font-size: 14px; color: var(--text-muted); text-align: center;">
+      + Watch 모드, MCP 서버, 프롬프트 에디터, 키보드 단축키 등
+    </div>
+    <div style="margin-top: 36px;">
+      <div class="code-block" style="max-width: 500px; font-size: 15px; line-height: 2;">
+        <div><span class="comment"># 설치 & 실행</span></div>
+        <div><span class="cmd">npm install -g</span> <span class="string">idea-manager</span></div>
+        <div><span class="cmd">im start</span></div>
+        <div></div>
+        <div><span class="comment"># 자동 실행</span></div>
+        <div><span class="cmd">im watch</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 10: 시연 화면 -->
+  <div class="slide" data-index="10">
     <div class="section-header" style="margin-bottom: 24px;">
       <div class="slide-tag">Live Demo</div>
       <h2>실제 화면</h2>
@@ -1667,89 +1750,6 @@
             </div>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Slide 9: 태스크 상태 관리 -->
-  <div class="slide" data-index="9">
-    <div class="section-header">
-      <div class="slide-tag">Task Management</div>
-      <h2>6단계 상태 관리</h2>
-      <p>프롬프트의 상태를 추적하고, AI가 알아서 대기열에서 꺼내 작업합니다</p>
-    </div>
-    <div class="flow" style="margin-bottom: 8px;">
-      <div style="padding: 12px 20px; border-radius: 12px; background: rgba(148,163,184,0.1); border: 1px solid rgba(148,163,184,0.2); font-size: 15px; font-weight: 600;">&#128161; Idea</div>
-      <span class="flow-arrow">&#10230;</span>
-      <div style="padding: 12px 20px; border-radius: 12px; background: rgba(99,102,241,0.1); border: 1px solid rgba(99,102,241,0.2); font-size: 15px; font-weight: 600; color: var(--accent-light);">&#9999;&#65039; Writing</div>
-      <span class="flow-arrow">&#10230;</span>
-      <div style="padding: 12px 20px; border-radius: 12px; background: rgba(6,182,212,0.1); border: 1px solid rgba(6,182,212,0.2); font-size: 15px; font-weight: 600; color: var(--cyan);">&#128640; Submitted</div>
-      <span class="flow-arrow">&#10230;</span>
-      <div style="padding: 12px 20px; border-radius: 12px; background: rgba(245,158,11,0.1); border: 1px solid rgba(245,158,11,0.2); font-size: 15px; font-weight: 600; color: var(--orange);">&#129514; Testing</div>
-      <span class="flow-arrow">&#10230;</span>
-      <div style="padding: 12px 20px; border-radius: 12px; background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.2); font-size: 15px; font-weight: 600; color: var(--green);">&#9989; Done</div>
-    </div>
-    <div style="margin-bottom: 40px;">
-      <div style="padding: 12px 20px; border-radius: 12px; background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.2); font-size: 15px; font-weight: 600; color: var(--red); display: inline-block;">&#128308; Problem</div>
-    </div>
-    <div class="cards-grid" style="max-width: 900px; grid-template-columns: 1fr 1fr;">
-      <div class="card">
-        <span class="card-icon">&#128064;</span>
-        <div class="card-title">Watch 모드</div>
-        <div class="card-desc" style="line-height: 1.9;">
-          <strong style="color:#fff;">Submitted</strong> 상태 태스크를 자동 감지<br>
-          AI CLI가 프롬프트를 읽고 자동 실행<br>
-          완료되면 상태를 <strong style="color:var(--green);">Done</strong>으로 변경
-        </div>
-      </div>
-      <div class="card">
-        <span class="card-icon">&#128268;</span>
-        <div class="card-title">MCP 서버</div>
-        <div class="card-desc" style="line-height: 1.9;">
-          외부 AI 에이전트가 태스크 목록 조회<br>
-          대기 중인 프롬프트를 직접 꺼내 실행<br>
-          하나하나 "이거 해줘" 할 필요 없음
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Slide 10: 핵심 기능들 -->
-  <div class="slide" data-index="10">
-    <div class="bg-glow cyan"></div>
-    <div class="section-header">
-      <div class="slide-tag">Features</div>
-      <h2>핵심 기능</h2>
-    </div>
-    <div class="feature-list">
-      <div class="feature-item">
-        <div class="feature-check">&#10003;</div>
-        <span><strong>3-패널 워크스페이스</strong> &mdash; 브레인스토밍, 태스크, 프롬프트를 한 화면에서</span>
-      </div>
-      <div class="feature-item">
-        <div class="feature-check">&#10003;</div>
-        <span><strong>멀티 에이전트</strong> &mdash; Claude, Gemini, Codex 등 태스크 성격에 따라 선택</span>
-      </div>
-      <div class="feature-item">
-        <div class="feature-check">&#10003;</div>
-        <span><strong>AI 채팅</strong> &mdash; 태스크별로 AI와 대화하면서 방향 잡기</span>
-      </div>
-      <div class="feature-item">
-        <div class="feature-check">&#10003;</div>
-        <span><strong>Git 동기화</strong> &mdash; 집 PC와 회사 PC에서 같은 데이터를 쓸 수 있어요</span>
-      </div>
-    </div>
-    <div style="margin-top: 16px; max-width: 700px; font-size: 14px; color: var(--text-muted); text-align: center;">
-      + Watch 모드, MCP 서버, 프롬프트 에디터, 키보드 단축키 등
-    </div>
-    <div style="margin-top: 36px;">
-      <div class="code-block" style="max-width: 500px; font-size: 15px; line-height: 2;">
-        <div><span class="comment"># 설치 & 실행</span></div>
-        <div><span class="cmd">npm install -g</span> <span class="string">idea-manager</span></div>
-        <div><span class="cmd">im start</span></div>
-        <div></div>
-        <div><span class="comment"># 자동 실행</span></div>
-        <div><span class="cmd">im watch</span></div>
       </div>
     </div>
   </div>
