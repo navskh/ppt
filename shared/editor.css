@@ -1,0 +1,180 @@
+/* Script Editor (shared) — themed via each deck's CSS variables */
+
+.script-editor-overlay {
+  position: fixed;
+  top: 0; right: 0; bottom: 0;
+  width: 420px;
+  background: var(--bg-dark);
+  border-left: 1px solid var(--border);
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  box-shadow: -4px 0 24px rgba(0,0,0,0.4);
+  transform: translateX(100%);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+.script-editor-overlay.open {
+  transform: translateX(0);
+  pointer-events: auto;
+}
+
+.script-editor {
+  width: 100%;
+  height: 100%;
+  background: var(--bg-dark);
+  display: flex;
+  flex-direction: column;
+}
+
+.script-editor-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border);
+}
+.script-editor-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text);
+}
+.script-editor-nav {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.script-editor-nav button {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  color: var(--text);
+  width: 32px; height: 32px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+.script-editor-nav button:hover { background: var(--bg-card-hover); }
+
+.script-editor-timer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-card);
+}
+.timer-display {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: 2px;
+  font-variant-numeric: tabular-nums;
+}
+.timer-display.running { color: var(--accent-light); }
+.timer-controls { display: flex; gap: 6px; }
+.timer-btn {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  color: var(--text);
+  height: 30px;
+  padding: 0 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+.timer-btn:hover { background: var(--bg-card-hover); }
+.timer-btn.primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+.timer-btn.primary:hover { background: var(--accent-light); border-color: var(--accent-light); }
+
+.script-editor-body {
+  padding: 12px 16px;
+  flex: 1;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.script-editor-body textarea {
+  width: 100%;
+  flex: 1;
+  min-height: 0;
+  background: #0d1117;
+  border: 1px solid #21262d;
+  border-radius: 8px;
+  padding: 16px;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 14px;
+  line-height: 1.8;
+  color: #e2e8f0;
+  resize: none;
+  outline: none;
+}
+.script-editor-body textarea:focus { border-color: var(--accent); }
+
+.script-editor-footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  border-top: 1px solid var(--border);
+  gap: 8px;
+}
+.script-editor-footer .hint { font-size: 11px; color: var(--text-muted); }
+.script-editor-footer .actions { display: flex; gap: 8px; }
+
+.btn-reset {
+  padding: 6px 14px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text-dim);
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.btn-reset:hover { background: rgba(239,68,68,0.1); color: var(--red); border-color: var(--red); }
+
+.btn-save {
+  padding: 6px 18px;
+  border-radius: 8px;
+  border: none;
+  background: var(--accent);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.btn-save:hover { background: var(--accent-light); }
+
+.save-toast {
+  position: fixed;
+  top: 24px;
+  right: 24px;
+  background: var(--green);
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  z-index: 1100;
+  opacity: 0;
+  transform: translateY(-8px);
+  transition: all 0.3s;
+  pointer-events: none;
+}
+.save-toast.show { opacity: 1; transform: translateY(0); }

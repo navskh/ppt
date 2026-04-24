@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AI 시대, "잘 시키는 사람"이 이긴다</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+KR:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../shared/editor.css">
 <style>
   :root {
     --bg-dark: #0a0a0f;
@@ -929,208 +930,11 @@
   .demo-prompt-comment { color: #565f89; }
   .demo-prompt-highlight { color: #7aa2f7; }
 
-  /* Script Editor Panel — side panel */
-  .script-editor-overlay {
-    position: fixed;
-    top: 0; right: 0; bottom: 0;
-    width: 420px;
-    background: #1a1a2e;
-    border-left: 1px solid var(--border);
-    z-index: 999;
-    display: flex;
-    flex-direction: column;
-    box-shadow: -4px 0 24px rgba(0,0,0,0.4);
-    transform: translateX(100%);
-    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    pointer-events: none;
-  }
-  .script-editor-overlay.open {
-    transform: translateX(0);
-    pointer-events: auto;
-  }
-
-  /* slides-wrapper가 에디터 열릴 때 줄어듦 */
+  /* slides-wrapper가 에디터 열릴 때 줄어듦 (editor panel itself is styled in shared/editor.css) */
   .slides-wrapper.editor-open {
     width: calc(100vw - 420px);
     transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   }
-
-  .script-editor {
-    width: 100%;
-    height: 100%;
-    background: #1a1a2e;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .script-editor-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 14px 16px;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .script-editor-title {
-    font-size: 15px;
-    font-weight: 700;
-    color: #fff;
-  }
-
-  .script-editor-nav {
-    display: flex;
-    gap: 8px;
-    align-items: center;
-  }
-
-  .script-editor-nav button {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    color: var(--text);
-    width: 32px; height: 32px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 14px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background 0.2s;
-  }
-  .script-editor-nav button:hover { background: var(--bg-card-hover); }
-
-  .script-editor-timer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px 16px;
-    border-bottom: 1px solid var(--border);
-    background: #15152a;
-  }
-  .timer-display {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 22px;
-    font-weight: 700;
-    color: #e2e8f0;
-    letter-spacing: 2px;
-    font-variant-numeric: tabular-nums;
-  }
-  .timer-display.running { color: var(--accent-light); }
-  .timer-controls {
-    display: flex;
-    gap: 6px;
-  }
-  .timer-btn {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    color: var(--text);
-    height: 30px;
-    padding: 0 12px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 12px;
-    font-weight: 600;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.2s;
-  }
-  .timer-btn:hover { background: var(--bg-card-hover); }
-  .timer-btn.primary {
-    background: var(--accent);
-    border-color: var(--accent);
-    color: #fff;
-  }
-  .timer-btn.primary:hover { background: var(--accent-light); border-color: var(--accent-light); }
-
-  .script-editor-body {
-    padding: 12px 16px;
-    flex: 1;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .script-editor-body textarea {
-    width: 100%;
-    flex: 1;
-    min-height: 0;
-    background: #0d1117;
-    border: 1px solid #21262d;
-    border-radius: 8px;
-    padding: 16px;
-    font-family: 'Noto Sans KR', sans-serif;
-    font-size: 14px;
-    line-height: 1.8;
-    color: #e2e8f0;
-    resize: none;
-    outline: none;
-  }
-  .script-editor-body textarea:focus {
-    border-color: var(--accent);
-  }
-
-  .script-editor-footer {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-    padding: 12px 16px;
-    border-top: 1px solid var(--border);
-    gap: 8px;
-  }
-
-  .script-editor-footer .hint {
-    font-size: 11px;
-    color: var(--text-muted);
-  }
-
-  .script-editor-footer .actions {
-    display: flex;
-    gap: 8px;
-  }
-
-  .btn-reset {
-    padding: 6px 14px;
-    border-radius: 8px;
-    border: 1px solid var(--border);
-    background: transparent;
-    color: var(--text-dim);
-    font-size: 13px;
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-  .btn-reset:hover { background: rgba(239,68,68,0.1); color: var(--red); border-color: var(--red); }
-
-  .btn-save {
-    padding: 6px 18px;
-    border-radius: 8px;
-    border: none;
-    background: var(--accent);
-    color: #fff;
-    font-size: 13px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-  .btn-save:hover { background: var(--accent-light); }
-
-  .save-toast {
-    position: fixed;
-    top: 24px;
-    right: 24px;
-    background: var(--green);
-    color: #fff;
-    padding: 10px 20px;
-    border-radius: 8px;
-    font-size: 14px;
-    font-weight: 600;
-    z-index: 1100;
-    opacity: 0;
-    transform: translateY(-8px);
-    transition: all 0.3s;
-    pointer-events: none;
-  }
-  .save-toast.show { opacity: 1; transform: translateY(0); }
 
   /* ═══ Ambient Animations ═══ */
 
@@ -1244,39 +1048,6 @@
 </style>
 </head>
 <body>
-
-<!-- Script Editor -->
-<div class="script-editor-overlay" id="scriptEditorOverlay">
-  <div class="script-editor">
-    <div class="script-editor-header">
-      <div class="script-editor-title" id="editorTitle">Slide 1 / 13 — 스크립트 편집</div>
-      <div class="script-editor-nav">
-        <button onclick="editorNav(-1)" title="이전 슬라이드">&#8592;</button>
-        <button onclick="editorNav(1)" title="다음 슬라이드">&#8594;</button>
-        <button onclick="toggleEditor()" title="닫기 (E)" style="margin-left: 8px; color: var(--text-muted);">&#10005;</button>
-      </div>
-    </div>
-    <div class="script-editor-timer">
-      <div class="timer-display" id="timerDisplay">00:00</div>
-      <div class="timer-controls">
-        <button class="timer-btn primary" id="timerToggleBtn" onclick="toggleTimer()">▶ 시작</button>
-        <button class="timer-btn" onclick="resetTimer()">리셋</button>
-      </div>
-    </div>
-    <div class="script-editor-body">
-      <textarea id="scriptTextarea" spellcheck="false"></textarea>
-    </div>
-    <div class="script-editor-footer">
-      <div class="hint">E: 열기/닫기 &nbsp;|&nbsp; Ctrl+S: 저장 &nbsp;|&nbsp; ←→: 슬라이드 이동</div>
-      <div class="actions">
-        <button class="btn-reset" onclick="resetScript()">되돌리기</button>
-        <button class="btn-save" onclick="saveScript()">저장</button>
-        <button class="btn-save" onclick="exportScripts(event)" style="background: var(--green);" title="Shift+클릭: 토큰 재설정">Git Push</button>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="save-toast" id="saveToast">저장 완료</div>
 
 <div class="slides-wrapper">
 
@@ -1970,238 +1741,21 @@
 </div>
 
 <script src="./scripts.js"></script>
+<script src="../shared/editor.js"></script>
 <script>
   let currentSlide = 0;
   const slides = document.querySelectorAll('.slide');
   const totalSlides = slides.length;
 
-  // scripts.js = 기본값 (git), localStorage = 수정값 (로컬)
-  const STORAGE_KEY = 'ppt-scripts';
-
-  function loadLocal() {
-    try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; }
-    catch { return {}; }
-  }
-
-  function getScript(index) {
-    const local = loadLocal();
-    return local[index] !== undefined ? local[index] : (SCRIPTS[index] || '');
-  }
-
-  function saveLocal(index, text) {
-    const local = loadLocal();
-    local[index] = text;
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(local));
-  }
-
-  function clearLocal(index) {
-    const local = loadLocal();
-    delete local[index];
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(local));
-  }
-
-  function logScript(index) {
-    const script = getScript(index);
-    if (!script) return;
-    console.clear();
-    console.log(
-      `%c 📋 Slide ${index + 1} / ${totalSlides} `,
-      'background: #6366f1; color: #fff; font-size: 14px; font-weight: bold; padding: 4px 12px; border-radius: 4px;'
-    );
-    console.log(
-      `%c${script}`,
-      'color: #1a1a2e; font-size: 13px; line-height: 1.8; white-space: pre-wrap;'
-    );
-  }
-
-  // ── 에디터 패널 ──
-  let editorOpen = false;
-  const overlay = document.getElementById('scriptEditorOverlay');
-  const textarea = document.getElementById('scriptTextarea');
-  const editorTitle = document.getElementById('editorTitle');
-  const saveToast = document.getElementById('saveToast');
-
-  function toggleEditor() {
-    editorOpen = !editorOpen;
-    overlay.classList.toggle('open', editorOpen);
-    document.querySelector('.slides-wrapper').classList.toggle('editor-open', editorOpen);
-    document.querySelector('.nav-bar').classList.toggle('editor-open', editorOpen);
-    if (editorOpen) loadEditor(currentSlide);
-  }
-
-  function loadEditor(index) {
-    textarea.value = getScript(index);
-    editorTitle.textContent = `Slide ${index + 1} / ${totalSlides} — 스크립트 편집`;
-  }
-
-  function saveScript() {
-    saveLocal(currentSlide, textarea.value);
-    logScript(currentSlide);
-    showToast('저장 완료');
-  }
-
-  function resetScript() {
-    const defaultScript = SCRIPTS[currentSlide] || '';
-    textarea.value = defaultScript;
-    clearLocal(currentSlide);
-    logScript(currentSlide);
-    showToast('기본값 복원');
-  }
-
-  function buildScriptsJs() {
-    const local = loadLocal();
-    const merged = { ...SCRIPTS };
-    for (const k in local) merged[k] = local[k];
-
-    let js = 'var SCRIPTS = {\n';
-    const keys = Object.keys(merged).sort((a, b) => Number(a) - Number(b));
-    keys.forEach((k, i) => {
-      const val = merged[k].replace(/\\/g, '\\\\').replace(/`/g, '\\`').replace(/\$/g, '\\$');
-      js += `  ${k}: \`${val}\``;
-      js += i < keys.length - 1 ? ',\n\n' : '\n';
-    });
-    js += '};\n';
-    return js;
-  }
-
-  const GH_REPO = 'navskh/ppt';
-  const GH_FILE_PATH = 'ai-prompt-management/scripts.js';
-  const GH_TOKEN_KEY = 'ppt_gh_token';
-
-  function promptForToken() {
-    const msg = 'GitHub Personal Access Token을 입력하세요.\n\n발급 방법:\n1. https://github.com/settings/personal-access-tokens/new\n2. Repository access → Only select repositories → "ppt"\n3. Repository permissions → Contents: Read and write\n4. Generate token → 복사해서 붙여넣기';
-    const t = prompt(msg);
-    return t ? t.trim() : '';
-  }
-
-  async function exportScripts(event) {
-    const content = buildScriptsJs();
-
-    if (event && event.shiftKey) {
-      localStorage.removeItem(GH_TOKEN_KEY);
-      showToast('토큰 초기화됨');
-    }
-
-    let token = localStorage.getItem(GH_TOKEN_KEY);
-    if (!token) {
-      token = promptForToken();
-      if (!token) {
-        showToast('취소됨');
-        return;
-      }
-      localStorage.setItem(GH_TOKEN_KEY, token);
-    }
-
-    showToast('푸시 중…');
-    try {
-      const apiBase = `https://api.github.com/repos/${GH_REPO}/contents/${GH_FILE_PATH}`;
-      const headers = {
-        Authorization: `Bearer ${token}`,
-        Accept: 'application/vnd.github+json',
-      };
-
-      const getRes = await fetch(apiBase, { headers });
-      if (getRes.status === 401 || getRes.status === 403) {
-        localStorage.removeItem(GH_TOKEN_KEY);
-        throw new Error('토큰 거부됨 (다시 클릭하면 재입력)');
-      }
-      if (!getRes.ok) throw new Error(`SHA 조회 실패 (${getRes.status})`);
-      const info = await getRes.json();
-
-      const b64 = btoa(unescape(encodeURIComponent(content)));
-      const putRes = await fetch(apiBase, {
-        method: 'PUT',
-        headers: { ...headers, 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          message: `chore: 스크립트 업데이트 (${new Date().toISOString().slice(0, 16).replace('T', ' ')})`,
-          content: b64,
-          sha: info.sha,
-        }),
-      });
-      if (!putRes.ok) {
-        const err = await putRes.json().catch(() => ({}));
-        throw new Error(`푸시 실패 (${putRes.status}) ${err.message || ''}`);
-      }
-      const result = await putRes.json();
-      showToast('✓ GitHub 푸시 완료');
-      console.log('[commit]', result.commit && result.commit.html_url);
-    } catch (e) {
-      console.error(e);
-      showToast('오류: ' + e.message);
-    }
-  }
-
-  function editorNav(dir) {
-    const target = currentSlide + dir;
-    if (target < 0 || target >= totalSlides) return;
-    goToSlide(target);
-    loadEditor(target);
-  }
-
-  // ── 타이머 ──
-  let timerInterval = null;
-  let timerStartedAt = null;
-  let timerElapsed = 0;
-  const timerDisplay = document.getElementById('timerDisplay');
-  const timerToggleBtn = document.getElementById('timerToggleBtn');
-
-  function formatTime(sec) {
-    const h = Math.floor(sec / 3600);
-    const m = Math.floor((sec % 3600) / 60).toString().padStart(2, '0');
-    const s = Math.floor(sec % 60).toString().padStart(2, '0');
-    return h > 0 ? `${h}:${m}:${s}` : `${m}:${s}`;
-  }
-
-  function currentElapsed() {
-    return timerStartedAt
-      ? timerElapsed + (Date.now() - timerStartedAt) / 1000
-      : timerElapsed;
-  }
-
-  function renderTimer() {
-    timerDisplay.textContent = formatTime(currentElapsed());
-  }
-
-  function toggleTimer() {
-    if (timerStartedAt) {
-      timerElapsed += (Date.now() - timerStartedAt) / 1000;
-      timerStartedAt = null;
-      clearInterval(timerInterval);
-      timerInterval = null;
-      timerToggleBtn.textContent = '▶ 재개';
-      timerDisplay.classList.remove('running');
-    } else {
-      timerStartedAt = Date.now();
-      timerInterval = setInterval(renderTimer, 1000);
-      timerToggleBtn.textContent = '❚❚ 정지';
-      timerDisplay.classList.add('running');
-      renderTimer();
-    }
-  }
-
-  function resetTimer() {
-    clearInterval(timerInterval);
-    timerInterval = null;
-    timerStartedAt = null;
-    timerElapsed = 0;
-    timerToggleBtn.textContent = '▶ 시작';
-    timerDisplay.classList.remove('running');
-    renderTimer();
-  }
-
-  function showToast(msg) {
-    saveToast.textContent = msg;
-    saveToast.classList.add('show');
-    setTimeout(() => saveToast.classList.remove('show'), 1500);
-  }
-
-  // 에디터 내 키보드 단축키
-  textarea.addEventListener('keydown', (e) => {
-    if ((e.metaKey || e.ctrlKey) && e.key === 's') {
-      e.preventDefault();
-      saveScript();
-    }
-    e.stopPropagation(); // 슬라이드 이동 방지
+  PPTEditor.init({
+    scripts: SCRIPTS,
+    totalSlides,
+    getCurrentSlide: () => currentSlide,
+    goToSlide: (i) => goToSlide(i),
+    storageKey: 'ppt-scripts',
+    githubPath: 'ai-prompt-management/scripts.js',
+    logColor: '#6366f1',
+    enableTimer: true,
   });
 
   const dotsContainer = document.getElementById('navDots');
@@ -2221,11 +1775,8 @@
 
     oldSlide.classList.remove('active');
     oldSlide.querySelectorAll('.reveal-step').forEach(s => s.classList.remove('revealed'));
-    if (direction > 0) {
-      oldSlide.classList.add('prev');
-    } else {
-      oldSlide.classList.remove('prev');
-    }
+    if (direction > 0) oldSlide.classList.add('prev');
+    else oldSlide.classList.remove('prev');
 
     newSlide.style.transition = 'none';
     newSlide.style.opacity = '0';
@@ -2246,25 +1797,17 @@
     });
 
     updateUI();
-    logScript(index);
+    PPTEditor.onSlideChange(index);
   }
 
   function navigate(dir) {
     if (dir > 0) {
-      const currentEl = slides[currentSlide];
-      const steps = currentEl.querySelectorAll('.reveal-step:not(.revealed)');
-      if (steps.length > 0) {
-        steps[0].classList.add('revealed');
-        return;
-      }
+      const steps = slides[currentSlide].querySelectorAll('.reveal-step:not(.revealed)');
+      if (steps.length > 0) { steps[0].classList.add('revealed'); return; }
     }
     if (dir < 0) {
-      const currentEl = slides[currentSlide];
-      const revealedSteps = currentEl.querySelectorAll('.reveal-step.revealed');
-      if (revealedSteps.length > 0) {
-        revealedSteps[revealedSteps.length - 1].classList.remove('revealed');
-        return;
-      }
+      const revealed = slides[currentSlide].querySelectorAll('.reveal-step.revealed');
+      if (revealed.length > 0) { revealed[revealed.length - 1].classList.remove('revealed'); return; }
     }
     goToSlide(currentSlide + dir);
   }
@@ -2279,14 +1822,7 @@
   }
 
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'e' || e.key === 'E' || e.key === 'ㄷ') {
-      if (e.target === textarea) return;
-      e.preventDefault();
-      toggleEditor();
-      return;
-    }
-    if (e.key === 'Escape' && editorOpen) { toggleEditor(); return; }
-    if (editorOpen) return; // 에디터 열린 상태에서는 슬라이드 이동 차단
+    if (PPTEditor.handleKey(e)) return;
     if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); navigate(1); }
     if (e.key === 'ArrowLeft') { e.preventDefault(); navigate(-1); }
     if (e.key === 'Home') { e.preventDefault(); goToSlide(0); }
@@ -2308,7 +1844,7 @@
     currentSlide = savedSlide;
   }
   updateUI();
-  logScript(currentSlide);
+  PPTEditor.logScript(currentSlide);
 </script>
 
 </body>
