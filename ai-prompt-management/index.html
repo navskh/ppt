@@ -998,6 +998,50 @@
   }
   .script-editor-nav button:hover { background: var(--bg-card-hover); }
 
+  .script-editor-timer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--border);
+    background: #15152a;
+  }
+  .timer-display {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 22px;
+    font-weight: 700;
+    color: #e2e8f0;
+    letter-spacing: 2px;
+    font-variant-numeric: tabular-nums;
+  }
+  .timer-display.running { color: var(--accent-light); }
+  .timer-controls {
+    display: flex;
+    gap: 6px;
+  }
+  .timer-btn {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    color: var(--text);
+    height: 30px;
+    padding: 0 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+  }
+  .timer-btn:hover { background: var(--bg-card-hover); }
+  .timer-btn.primary {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+  }
+  .timer-btn.primary:hover { background: var(--accent-light); border-color: var(--accent-light); }
+
   .script-editor-body {
     padding: 12px 16px;
     flex: 1;
@@ -1210,6 +1254,13 @@
         <button onclick="editorNav(-1)" title="이전 슬라이드">&#8592;</button>
         <button onclick="editorNav(1)" title="다음 슬라이드">&#8594;</button>
         <button onclick="toggleEditor()" title="닫기 (E)" style="margin-left: 8px; color: var(--text-muted);">&#10005;</button>
+      </div>
+    </div>
+    <div class="script-editor-timer">
+      <div class="timer-display" id="timerDisplay">00:00</div>
+      <div class="timer-controls">
+        <button class="timer-btn primary" id="timerToggleBtn" onclick="toggleTimer()">▶ 시작</button>
+        <button class="timer-btn" onclick="resetTimer()">리셋</button>
       </div>
     </div>
     <div class="script-editor-body">
@@ -2045,6 +2096,57 @@
     if (target < 0 || target >= totalSlides) return;
     goToSlide(target);
     loadEditor(target);
+  }
+
+  // ── 타이머 ──
+  let timerInterval = null;
+  let timerStartedAt = null;
+  let timerElapsed = 0;
+  const timerDisplay = document.getElementById('timerDisplay');
+  const timerToggleBtn = document.getElementById('timerToggleBtn');
+
+  function formatTime(sec) {
+    const h = Math.floor(sec / 3600);
+    const m = Math.floor((sec % 3600) / 60).toString().padStart(2, '0');
+    const s = Math.floor(sec % 60).toString().padStart(2, '0');
+    return h > 0 ? `${h}:${m}:${s}` : `${m}:${s}`;
+  }
+
+  function currentElapsed() {
+    return timerStartedAt
+      ? timerElapsed + (Date.now() - timerStartedAt) / 1000
+      : timerElapsed;
+  }
+
+  function renderTimer() {
+    timerDisplay.textContent = formatTime(currentElapsed());
+  }
+
+  function toggleTimer() {
+    if (timerStartedAt) {
+      timerElapsed += (Date.now() - timerStartedAt) / 1000;
+      timerStartedAt = null;
+      clearInterval(timerInterval);
+      timerInterval = null;
+      timerToggleBtn.textContent = '▶ 재개';
+      timerDisplay.classList.remove('running');
+    } else {
+      timerStartedAt = Date.now();
+      timerInterval = setInterval(renderTimer, 1000);
+      timerToggleBtn.textContent = '❚❚ 정지';
+      timerDisplay.classList.add('running');
+      renderTimer();
+    }
+  }
+
+  function resetTimer() {
+    clearInterval(timerInterval);
+    timerInterval = null;
+    timerStartedAt = null;
+    timerElapsed = 0;
+    timerToggleBtn.textContent = '▶ 시작';
+    timerDisplay.classList.remove('running');
+    renderTimer();
   }
 
   function showToast(msg) {
