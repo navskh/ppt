@@ -1271,7 +1271,7 @@
       <div class="actions">
         <button class="btn-reset" onclick="resetScript()">되돌리기</button>
         <button class="btn-save" onclick="saveScript()">저장</button>
-        <button class="btn-save" onclick="exportScripts()" style="background: var(--green);">Git Push</button>
+        <button class="btn-save" onclick="exportScripts(event)" style="background: var(--green);" title="Shift+클릭: 토큰 재설정">Git Push</button>
       </div>
     </div>
   </div>
@@ -2064,30 +2064,70 @@
     return js;
   }
 
-  async function exportScripts() {
+  const GH_REPO = 'navskh/ppt';
+  const GH_FILE_PATH = 'ai-prompt-management/scripts.js';
+  const GH_TOKEN_KEY = 'ppt_gh_token';
+
+  function promptForToken() {
+    const msg = 'GitHub Personal Access Token을 입력하세요.\n\n발급 방법:\n1. https://github.com/settings/personal-access-tokens/new\n2. Repository access → Only select repositories → "ppt"\n3. Repository permissions → Contents: Read and write\n4. Generate token → 복사해서 붙여넣기';
+    const t = prompt(msg);
+    return t ? t.trim() : '';
+  }
+
+  async function exportScripts(event) {
     const content = buildScriptsJs();
-    try {
-      const res = await fetch('/save-scripts', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ dir: 'ai-prompt-management', content }),
-      });
-      const result = await res.json();
-      if (result.ok) {
-        showToast('저장 + Git Push 완료');
-      } else {
-        showToast('오류: ' + result.message);
+
+    if (event && event.shiftKey) {
+      localStorage.removeItem(GH_TOKEN_KEY);
+      showToast('토큰 초기화됨');
+    }
+
+    let token = localStorage.getItem(GH_TOKEN_KEY);
+    if (!token) {
+      token = promptForToken();
+      if (!token) {
+        showToast('취소됨');
+        return;
       }
-    } catch {
-      // 서버 없으면 파일 다운로드 fallback
-      const blob = new Blob([content], { type: 'text/javascript' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = 'scripts.js';
-      a.click();
-      URL.revokeObjectURL(url);
-      showToast('서버 없음 → scripts.js 다운로드');
+      localStorage.setItem(GH_TOKEN_KEY, token);
+    }
+
+    showToast('푸시 중…');
+    try {
+      const apiBase = `https://api.github.com/repos/${GH_REPO}/contents/${GH_FILE_PATH}`;
+      const headers = {
+        Authorization: `Bearer ${token}`,
+        Accept: 'application/vnd.github+json',
+      };
+
+      const getRes = await fetch(apiBase, { headers });
+      if (getRes.status === 401 || getRes.status === 403) {
+        localStorage.removeItem(GH_TOKEN_KEY);
+        throw new Error('토큰 거부됨 (다시 클릭하면 재입력)');
+      }
+      if (!getRes.ok) throw new Error(`SHA 조회 실패 (${getRes.status})`);
+      const info = await getRes.json();
+
+      const b64 = btoa(unescape(encodeURIComponent(content)));
+      const putRes = await fetch(apiBase, {
+        method: 'PUT',
+        headers: { ...headers, 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          message: `chore: 스크립트 업데이트 (${new Date().toISOString().slice(0, 16).replace('T', ' ')})`,
+          content: b64,
+          sha: info.sha,
+        }),
+      });
+      if (!putRes.ok) {
+        const err = await putRes.json().catch(() => ({}));
+        throw new Error(`푸시 실패 (${putRes.status}) ${err.message || ''}`);
+      }
+      const result = await putRes.json();
+      showToast('✓ GitHub 푸시 완료');
+      console.log('[commit]', result.commit && result.commit.html_url);
+    } catch (e) {
+      console.error(e);
+      showToast('오류: ' + e.message);
     }
   }
 
