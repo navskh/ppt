@@ -1271,6 +1271,13 @@
     }
   });
 
+  // Click anywhere on slide → next, Shift+click → previous
+  document.addEventListener('click', (e) => {
+    if (e.target.closest('.nav-bar, button, a, input, textarea, select, label')) return;
+    if (window.getSelection && window.getSelection().toString().length > 0) return;
+    navigate(e.shiftKey ? -1 : 1);
+  });
+
   // Touch/swipe support
   let touchStartX = 0;
   document.addEventListener('touchstart', (e) => {

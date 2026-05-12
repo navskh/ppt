@@ -1476,6 +1476,7 @@
   const totalSlides = slides.length;
 
   PPTEditor.init({
+    navigate: (dir) => navigate(dir),
     scripts: SCRIPTS,
     totalSlides,
     getCurrentSlide: () => currentSlide,
@@ -1553,12 +1554,6 @@
     if (e.key === 'End') { e.preventDefault(); goToSlide(totalSlides - 1); }
   });
 
-  let touchStartX = 0;
-  document.addEventListener('touchstart', (e) => { touchStartX = e.changedTouches[0].screenX; });
-  document.addEventListener('touchend', (e) => {
-    const diff = touchStartX - e.changedTouches[0].screenX;
-    if (Math.abs(diff) > 50) navigate(diff > 0 ? 1 : -1);
-  });
 
   const savedSlide = parseInt(localStorage.getItem('ppt-last-slide-jabis'));
   if (savedSlide > 0 && savedSlide < totalSlides) {

@@ -196,6 +196,30 @@
     state.opts.goToSlide(target);
   }
 
+  // Project-supplied navigate (handles reveal-step etc.). Falls back to plain nav().
+  function projectNavigate(dir) {
+    if (typeof state.opts.navigate === 'function') state.opts.navigate(dir);
+    else nav(dir);
+  }
+
+  // Auto-attached click + touch handlers (only when opts.navigate provided)
+  const CLICK_IGNORE_SELECTOR = '.nav-bar, #ppt-editor-overlay, .script-editor-overlay, .save-toast, button, a, input, textarea, select, label';
+  function onSlideClick(e) {
+    if (e.target.closest(CLICK_IGNORE_SELECTOR)) return;
+    if (window.getSelection && window.getSelection().toString().length > 0) return;
+    projectNavigate(e.shiftKey ? -1 : 1);
+  }
+  function onTouchStart(e) { state.touchStartX = e.changedTouches[0].screenX; }
+  function onTouchEnd(e) {
+    const diff = state.touchStartX - e.changedTouches[0].screenX;
+    if (Math.abs(diff) > 50) projectNavigate(diff > 0 ? 1 : -1);
+  }
+  function attachInputListeners() {
+    document.addEventListener('click', onSlideClick);
+    document.addEventListener('touchstart', onTouchStart);
+    document.addEventListener('touchend', onTouchEnd);
+  }
+
   function onSlideChange(index) {
     if (state.open) loadEditor(index);
     logScript(index);
@@ -308,6 +332,8 @@
         }
         e.stopPropagation();
       });
+
+      if (typeof state.opts.navigate === 'function') attachInputListeners();
     },
     handleKey: handleKey,
     onSlideChange: onSlideChange,
