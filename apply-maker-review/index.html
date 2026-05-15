@@ -2359,6 +2359,797 @@
     .harness-card-illu { width: 100%; max-width: 240px; margin: 0 auto; }
     .harness-caption { flex-direction: column; align-items: flex-start; gap: 10px; }
   }
+
+  /* ═══════════ Tech slides (06~14) ═══════════ */
+  .tech-slide { justify-content: center; padding: 28px 56px 24px; }
+  .tech-slide .slide-eyebrow { font-size: 11px; padding: 5px 12px; }
+  .tech-slide .slide-title { font-size: clamp(26px, 3.2vw, 40px); line-height: 1.12; }
+  .tech-wrap {
+    position: relative;
+    z-index: 3;
+    width: 100%;
+    max-width: 1500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+  }
+  .tech-lede {
+    font-size: 15px;
+    color: var(--text-dim);
+    line-height: 1.5;
+    text-align: center;
+    max-width: 1000px;
+    letter-spacing: -0.005em;
+  }
+  .tech-lede .hi {
+    color: var(--vibe-purple);
+    font-weight: 700;
+  }
+  .tech-lede code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.9em;
+    padding: 2px 8px;
+    border-radius: 5px;
+    background: rgba(168, 85, 247, 0.18);
+    color: var(--text);
+  }
+
+  .tech-grid {
+    width: 100%;
+    display: grid;
+    gap: 14px;
+  }
+  .tech-grid.cols-2 { grid-template-columns: 1fr 1fr; }
+  .tech-grid.cols-3 { grid-template-columns: 1fr 1fr 1fr; }
+  .tech-grid.cols-4 { grid-template-columns: 1fr 1fr 1fr 1fr; }
+
+  .tech-card {
+    position: relative;
+    background: rgba(22, 20, 42, 0.74);
+    border: 1px solid rgba(168, 85, 247, 0.26);
+    border-radius: 14px;
+    backdrop-filter: blur(14px);
+    padding: 16px 18px 14px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-height: 0;
+    opacity: 0;
+    transform: translateY(18px) scale(0.96);
+    transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .tech-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--accent, var(--vibe-purple)), transparent);
+    opacity: 0.8;
+  }
+  .tech-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at top right, var(--accent-soft, rgba(168, 85, 247, 0.13)), transparent 65%);
+    pointer-events: none;
+  }
+  .tech-grid.revealed .tech-card { opacity: 1; transform: translateY(0) scale(1); }
+  .tech-grid.revealed .tech-card:nth-child(1) { transition-delay: 0.05s; }
+  .tech-grid.revealed .tech-card:nth-child(2) { transition-delay: 0.18s; }
+  .tech-grid.revealed .tech-card:nth-child(3) { transition-delay: 0.31s; }
+  .tech-grid.revealed .tech-card:nth-child(4) { transition-delay: 0.44s; }
+  .tech-grid.revealed .tech-card:nth-child(5) { transition-delay: 0.57s; }
+  .tech-grid.revealed .tech-card:nth-child(6) { transition-delay: 0.70s; }
+
+  .tech-card.c-cyan   { --accent: var(--vibe-cyan);   --accent-soft: rgba(6, 182, 212, 0.16); }
+  .tech-card.c-purple { --accent: var(--vibe-purple); --accent-soft: rgba(168, 85, 247, 0.18); }
+  .tech-card.c-amber  { --accent: var(--vibe-amber);  --accent-soft: rgba(245, 158, 11, 0.16); }
+  .tech-card.c-pink   { --accent: var(--vibe-pink);   --accent-soft: rgba(236, 72, 153, 0.18); }
+  .tech-card.c-blue   { --accent: var(--vibe-blue);   --accent-soft: rgba(99, 102, 241, 0.18); }
+
+  .tech-card-head {
+    display: flex; align-items: center; justify-content: space-between; gap: 10px;
+  }
+  .tech-card-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--accent, var(--vibe-purple));
+    letter-spacing: 3px;
+    font-weight: 700;
+  }
+  .tech-card-badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 100px;
+    background: rgba(0,0,0,0.4);
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    letter-spacing: 0.8px;
+  }
+  .tech-card-title {
+    font-size: 17px;
+    font-weight: 800;
+    color: var(--text);
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+  }
+  .tech-card-title .accent { color: var(--accent); }
+  .tech-card-desc {
+    font-size: 12.5px;
+    color: var(--text-dim);
+    line-height: 1.5;
+    letter-spacing: -0.005em;
+  }
+  .tech-card-desc strong { color: var(--text); font-weight: 700; }
+  .tech-card-desc code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.88em;
+    padding: 1px 6px;
+    border-radius: 4px;
+    background: rgba(168, 85, 247, 0.15);
+    color: var(--accent);
+  }
+
+  .tech-code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    background: rgba(6, 6, 14, 0.65);
+    border: 1px solid rgba(168, 85, 247, 0.20);
+    border-radius: 8px;
+    padding: 10px 12px;
+    color: #c4b5fd;
+    white-space: pre;
+    overflow: auto;
+    line-height: 1.4;
+    letter-spacing: -0.005em;
+    margin-top: 2px;
+  }
+  .tech-code .k { color: #c084fc; font-weight: 600; }
+  .tech-code .s { color: #fcd34d; }
+  .tech-code .c { color: #6b7280; font-style: italic; }
+  .tech-code .n { color: #f9a8d4; }
+  .tech-code .f { color: #67e8f9; }
+  .tech-code .v { color: #e9d5ff; }
+
+  .tech-chips {
+    display: flex; flex-wrap: wrap; gap: 6px;
+    margin-top: auto;
+    padding-top: 4px;
+  }
+  .tech-chip {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    padding: 3px 9px;
+    border-radius: 100px;
+    background: rgba(168, 85, 247, 0.10);
+    border: 1px solid rgba(168, 85, 247, 0.25);
+    color: var(--accent, var(--vibe-purple));
+    letter-spacing: 0.4px;
+  }
+
+  /* WS protocol catalog */
+  .ws-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    width: 100%;
+  }
+  .ws-col {
+    background: rgba(22, 20, 42, 0.74);
+    border-radius: 14px;
+    border: 1px solid rgba(168, 85, 247, 0.25);
+    padding: 14px 18px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    min-height: 0;
+  }
+  .ws-col.c2s { border-color: rgba(6, 182, 212, 0.4); box-shadow: 0 0 28px rgba(6,182,212,0.06) inset; }
+  .ws-col.s2c { border-color: rgba(236, 72, 153, 0.4); box-shadow: 0 0 28px rgba(236,72,153,0.06) inset; }
+  .ws-col-head {
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    border-bottom: 1px dashed rgba(168, 85, 247, 0.25);
+    padding-bottom: 10px;
+  }
+  .ws-col-arrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    color: var(--text);
+  }
+  .ws-col.c2s .ws-col-arrow { color: var(--vibe-cyan); }
+  .ws-col.s2c .ws-col-arrow { color: var(--vibe-pink); }
+  .ws-col-count {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 100px;
+    border: 1px solid currentColor;
+    letter-spacing: 0.5px;
+  }
+  .ws-col.c2s .ws-col-count { color: var(--vibe-cyan); }
+  .ws-col.s2c .ws-col-count { color: var(--vibe-pink); }
+  .ws-list {
+    list-style: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px 14px;
+  }
+  .ws-list li {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px;
+    color: var(--text-dim);
+    padding: 3px 0 3px 14px;
+    position: relative;
+  }
+  .ws-list li::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 10px;
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--text-muted);
+    opacity: 0.55;
+  }
+  .ws-col.c2s .ws-list li::before { background: var(--vibe-cyan); opacity: 0.55; }
+  .ws-col.s2c .ws-list li::before { background: var(--vibe-pink); opacity: 0.55; }
+  .ws-list li.hi { color: var(--text); font-weight: 700; }
+  .ws-list li.hi::before { background: var(--vibe-amber); opacity: 1; box-shadow: 0 0 8px var(--vibe-amber); }
+
+  .ws-msg-shape {
+    background: rgba(6, 6, 14, 0.6);
+    border: 1px solid rgba(168, 85, 247, 0.2);
+    border-radius: 10px;
+    padding: 10px 14px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 18px;
+    align-items: center;
+  }
+  .ws-msg-shape pre {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: #c4b5fd;
+    line-height: 1.55;
+  }
+  .ws-msg-shape pre .k { color: #c084fc; }
+  .ws-msg-shape pre .s { color: #fcd34d; }
+  .ws-msg-shape .ws-msg-note {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--vibe-amber);
+    letter-spacing: 0.5px;
+  }
+
+  /* Prompt enrichment stack */
+  .enrich-stack {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+  }
+  .enrich-row {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 22px;
+    align-items: center;
+    background: rgba(22, 20, 42, 0.7);
+    border: 1px solid rgba(168, 85, 247, 0.22);
+    border-left: 4px solid var(--accent, var(--vibe-purple));
+    border-radius: 10px;
+    padding: 9px 16px;
+    opacity: 0;
+    transform: translateX(-12px);
+    transition: opacity 0.45s ease, transform 0.45s cubic-bezier(0.16,1,0.3,1);
+  }
+  .enrich-stack.revealed .enrich-row { opacity: 1; transform: translateX(0); }
+  .enrich-stack.revealed .enrich-row:nth-child(1) { transition-delay: 0.04s; }
+  .enrich-stack.revealed .enrich-row:nth-child(2) { transition-delay: 0.14s; }
+  .enrich-stack.revealed .enrich-row:nth-child(3) { transition-delay: 0.24s; }
+  .enrich-stack.revealed .enrich-row:nth-child(4) { transition-delay: 0.34s; }
+  .enrich-stack.revealed .enrich-row:nth-child(5) { transition-delay: 0.44s; }
+  .enrich-stack.revealed .enrich-row:nth-child(6) { transition-delay: 0.54s; }
+  .enrich-row.r1 { --accent: var(--vibe-cyan); }
+  .enrich-row.r2 { --accent: var(--vibe-purple); }
+  .enrich-row.r3 { --accent: var(--vibe-blue); }
+  .enrich-row.r4 { --accent: var(--vibe-amber); }
+  .enrich-row.r5 { --accent: var(--vibe-pink); }
+  .enrich-row.r6 { --accent: #22c55e; }
+  .enrich-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    color: var(--accent);
+    font-weight: 700;
+    letter-spacing: 0.3px;
+  }
+  .enrich-desc {
+    font-size: 13.5px;
+    color: var(--text-dim);
+    line-height: 1.55;
+  }
+  .enrich-desc strong { color: var(--text); font-weight: 700; }
+  .enrich-desc code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.88em;
+    padding: 1px 6px;
+    border-radius: 4px;
+    background: rgba(168, 85, 247, 0.14);
+    color: var(--accent);
+  }
+  .enrich-final {
+    margin-top: 8px;
+    padding: 12px 18px;
+    background: linear-gradient(135deg, rgba(168,85,247,0.15), rgba(236,72,153,0.10));
+    border: 1px solid rgba(168, 85, 247, 0.5);
+    border-radius: 12px;
+    text-align: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: var(--text);
+    letter-spacing: 0.4px;
+  }
+  .enrich-final .arrow { color: var(--vibe-amber); margin: 0 8px; }
+
+  /* Intercept sequence */
+  .intercept-flow {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 18px;
+    width: 100%;
+    align-items: stretch;
+  }
+  .intercept-step {
+    position: relative;
+    background: rgba(22, 20, 42, 0.72);
+    border: 1px solid var(--accent, var(--vibe-purple));
+    border-radius: 12px;
+    padding: 12px 12px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-height: 0;
+    opacity: 0;
+    transform: translateY(14px);
+    transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.16,1,0.3,1);
+  }
+  .intercept-flow.revealed .intercept-step { opacity: 1; transform: translateY(0); }
+  .intercept-flow.revealed .intercept-step:nth-child(1) { transition-delay: 0.05s; }
+  .intercept-flow.revealed .intercept-step:nth-child(2) { transition-delay: 0.22s; }
+  .intercept-flow.revealed .intercept-step:nth-child(3) { transition-delay: 0.39s; }
+  .intercept-flow.revealed .intercept-step:nth-child(4) { transition-delay: 0.56s; }
+  .intercept-flow.revealed .intercept-step:nth-child(5) { transition-delay: 0.73s; }
+  .intercept-step.s1 { --accent: var(--vibe-purple); }
+  .intercept-step.s2 { --accent: var(--vibe-pink); }
+  .intercept-step.s3 { --accent: var(--vibe-amber); }
+  .intercept-step.s4 { --accent: var(--vibe-cyan); }
+  .intercept-step.s5 { --accent: var(--vibe-blue); }
+  .intercept-step + .intercept-step::before {
+    content: '➜';
+    position: absolute;
+    left: -18px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 22px;
+    color: var(--text-muted);
+    font-weight: 700;
+    opacity: 0.65;
+  }
+  .intercept-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    color: var(--accent);
+    letter-spacing: 2.5px;
+    font-weight: 700;
+  }
+  .intercept-title {
+    font-size: 15px;
+    font-weight: 800;
+    color: var(--text);
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+  }
+  .intercept-desc {
+    font-size: 12px;
+    color: var(--text-dim);
+    line-height: 1.55;
+  }
+  .intercept-desc code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.9em;
+    padding: 1px 5px;
+    border-radius: 4px;
+    background: rgba(168, 85, 247, 0.14);
+    color: var(--accent);
+  }
+
+  /* Session dir illustration */
+  .sess-dir-illu {
+    width: 100%;
+    background: rgba(6, 6, 14, 0.65);
+    border: 1px solid rgba(168, 85, 247, 0.22);
+    border-radius: 12px;
+    padding: 14px 22px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 26px;
+    align-items: start;
+  }
+  .sess-tree {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--text-dim);
+    line-height: 1.55;
+    white-space: pre;
+  }
+  .sess-tree .root { color: var(--vibe-purple); font-weight: 700; }
+  .sess-tree .sid { color: var(--vibe-amber); font-weight: 600; }
+  .sess-tree .proj { color: var(--vibe-cyan); font-weight: 600; }
+  .sess-tree .hook { color: var(--vibe-pink); }
+  .sess-tree .cmd { color: #c4b5fd; }
+  .sess-tree .com { color: #6b7280; font-style: italic; }
+  .sess-notes {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+  }
+  .sess-note {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  .sess-note .ico {
+    width: 26px; height: 26px;
+    border-radius: 7px;
+    background: rgba(168, 85, 247, 0.18);
+    border: 1px solid var(--vibe-purple);
+    color: var(--vibe-purple);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px;
+    font-weight: 800;
+    flex-shrink: 0;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .sess-note .ico.c { background: rgba(6,182,212,0.18); border-color: var(--vibe-cyan); color: var(--vibe-cyan); }
+  .sess-note .ico.p { background: rgba(236,72,153,0.18); border-color: var(--vibe-pink); color: var(--vibe-pink); }
+  .sess-note .ico.a { background: rgba(245,158,11,0.18); border-color: var(--vibe-amber); color: var(--vibe-amber); }
+  .sess-note-text {
+    font-size: 12.5px;
+    color: var(--text-dim);
+    line-height: 1.5;
+  }
+  .sess-note-text strong { color: var(--text); font-weight: 700; }
+  .sess-note-text code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.88em;
+    padding: 1px 6px;
+    border-radius: 4px;
+    background: rgba(168, 85, 247, 0.14);
+    color: var(--vibe-purple);
+  }
+
+  /* Two column code+notes */
+  .tech-split {
+    display: grid;
+    grid-template-columns: 1.15fr 1fr;
+    gap: 18px;
+    width: 100%;
+    align-items: stretch;
+  }
+  .tech-split-block {
+    background: rgba(22, 20, 42, 0.74);
+    border: 1px solid rgba(168, 85, 247, 0.25);
+    border-radius: 14px;
+    padding: 14px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    min-height: 0;
+  }
+  .tech-split-block h4 {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--vibe-purple);
+    letter-spacing: 1px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .tech-split-block ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+  }
+  .tech-split-block li {
+    font-size: 12.5px;
+    color: var(--text-dim);
+    line-height: 1.5;
+    padding-left: 16px;
+    position: relative;
+  }
+  .tech-split-block li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: var(--vibe-purple);
+    font-weight: 700;
+  }
+  .tech-split-block li strong { color: var(--text); font-weight: 700; }
+  .tech-split-block li code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.88em;
+    padding: 1px 6px;
+    border-radius: 4px;
+    background: rgba(168, 85, 247, 0.14);
+    color: var(--vibe-cyan);
+  }
+
+  /* Bottom caption shared */
+  .tech-caption {
+    width: 100%;
+    background: rgba(11, 10, 20, 0.72);
+    border: 1px solid rgba(168, 85, 247, 0.35);
+    border-radius: 12px;
+    padding: 11px 22px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-top: 2px;
+  }
+  .tech-caption-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--vibe-amber);
+    letter-spacing: 3px;
+    font-weight: 800;
+    padding: 4px 11px;
+    border-radius: 100px;
+    background: rgba(245, 158, 11, 0.12);
+    border: 1px solid rgba(245, 158, 11, 0.5);
+    flex-shrink: 0;
+  }
+  .tech-caption-text {
+    font-size: 14.5px;
+    color: var(--text);
+    line-height: 1.5;
+    letter-spacing: -0.005em;
+  }
+  .tech-caption-text .hi {
+    background: linear-gradient(135deg, var(--vibe-purple), var(--vibe-pink));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 800;
+  }
+
+  /* ─── Slide 17 · PACKAGE ROADMAP ─── */
+  .wip-tag {
+    display: inline-block;
+    margin-left: 10px;
+    padding: 2px 9px;
+    border-radius: 100px;
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.18), rgba(236, 72, 153, 0.18));
+    border: 1px solid rgba(245, 158, 11, 0.55);
+    color: var(--vibe-amber);
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    vertical-align: middle;
+    animation: wipPulse 2.6s ease-in-out infinite;
+  }
+  @keyframes wipPulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0); }
+    50%      { box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.18); }
+  }
+
+  .pkg-flow {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr auto 1fr;
+    align-items: stretch;
+    gap: 0;
+  }
+  .pkg-step {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 8px;
+    padding: 16px 10px 14px;
+    background: rgba(22, 20, 42, 0.72);
+    border: 1px solid var(--accent-line, rgba(168, 85, 247, 0.32));
+    border-radius: 14px;
+    text-align: center;
+    backdrop-filter: blur(12px);
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(14px);
+    transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .pkg-step::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--accent, var(--vibe-purple)), transparent);
+    opacity: 0.9;
+  }
+  .pkg-step .pks-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: var(--accent);
+    font-weight: 800;
+  }
+  .pkg-step .pks-icon {
+    font-size: 26px;
+    line-height: 1;
+    filter: drop-shadow(0 0 12px var(--accent-soft, rgba(168, 85, 247, 0.45)));
+  }
+  .pkg-step .pks-title {
+    font-size: 14px;
+    font-weight: 800;
+    color: var(--text);
+    letter-spacing: -0.01em;
+    line-height: 1.25;
+  }
+  .pkg-step .pks-desc {
+    font-size: 11px;
+    line-height: 1.4;
+    color: var(--text-muted);
+  }
+  .pkg-step .pks-desc code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    color: var(--accent);
+    background: var(--accent-soft, rgba(168, 85, 247, 0.12));
+    padding: 1px 5px;
+    border-radius: 4px;
+  }
+  .pkg-step.pks1 { --accent: var(--vibe-cyan);   --accent-soft: rgba(6, 182, 212, 0.18);   --accent-line: rgba(6, 182, 212, 0.40); }
+  .pkg-step.pks2 { --accent: var(--vibe-purple); --accent-soft: rgba(168, 85, 247, 0.18);  --accent-line: rgba(168, 85, 247, 0.40); }
+  .pkg-step.pks3 { --accent: var(--vibe-amber);  --accent-soft: rgba(245, 158, 11, 0.18);  --accent-line: rgba(245, 158, 11, 0.40); }
+  .pkg-step.pks4 { --accent: var(--vibe-blue);   --accent-soft: rgba(99, 102, 241, 0.18);  --accent-line: rgba(99, 102, 241, 0.40); }
+  .pkg-step.pks5 { --accent: var(--vibe-pink);   --accent-soft: rgba(236, 72, 153, 0.18);  --accent-line: rgba(236, 72, 153, 0.40); }
+
+  .pkg-flow.revealed .pkg-step { opacity: 1; transform: translateY(0); }
+  .pkg-flow.revealed .pks1 { transition-delay: 0.05s; }
+  .pkg-flow.revealed .pks2 { transition-delay: 0.30s; }
+  .pkg-flow.revealed .pks3 { transition-delay: 0.55s; }
+  .pkg-flow.revealed .pks4 { transition-delay: 0.80s; }
+  .pkg-flow.revealed .pks5 { transition-delay: 1.05s; }
+
+  .pkg-arr {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 4px;
+  }
+  .pkg-arr svg { width: 56px; height: 22px; overflow: visible; }
+  .pkg-arr .track { fill: none; stroke: rgba(168, 85, 247, 0.18); stroke-width: 2; stroke-dasharray: 4 5; }
+  .pkg-arr .glow {
+    fill: none; stroke-width: 2.4; stroke-linecap: round;
+    stroke-dasharray: 50; stroke-dashoffset: 50;
+    transition: stroke-dashoffset 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+    filter: drop-shadow(0 0 3px rgba(168, 85, 247, 0.45));
+  }
+  .pkg-arr .head { opacity: 0; transition: opacity 0.25s ease 0.4s; }
+  .pkg-arr.pka1 .glow { stroke: url(#gradFlow1); }
+  .pkg-arr.pka2 .glow { stroke: url(#gradFlow2); }
+  .pkg-arr.pka3 .glow { stroke: url(#gradFlow3); }
+  .pkg-arr.pka4 .glow { stroke: url(#gradFlow4); }
+  .pkg-arr.pka1 .head { fill: var(--vibe-purple); }
+  .pkg-arr.pka2 .head { fill: var(--vibe-amber); }
+  .pkg-arr.pka3 .head { fill: var(--vibe-blue); }
+  .pkg-arr.pka4 .head { fill: var(--vibe-pink); }
+  .pkg-flow.revealed .pkg-arr .glow { stroke-dashoffset: 0; }
+  .pkg-flow.revealed .pkg-arr .head { opacity: 1; }
+  .pkg-flow.revealed .pka1 .glow { transition-delay: 0.35s; }
+  .pkg-flow.revealed .pka2 .glow { transition-delay: 0.60s; }
+  .pkg-flow.revealed .pka3 .glow { transition-delay: 0.85s; }
+  .pkg-flow.revealed .pka4 .glow { transition-delay: 1.10s; }
+
+  .pkg-split {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+  .pkg-col {
+    position: relative;
+    padding: 14px 16px;
+    background: rgba(22, 20, 42, 0.7);
+    border: 1px solid rgba(168, 85, 247, 0.28);
+    border-radius: 14px;
+    backdrop-filter: blur(12px);
+  }
+  .pkg-col.pkg-today { border-color: rgba(16, 185, 129, 0.42); }
+  .pkg-col.pkg-next  { border-color: rgba(236, 72, 153, 0.42); }
+  .pkg-col::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    border-radius: 14px 14px 0 0;
+  }
+  .pkg-col.pkg-today::before { background: linear-gradient(90deg, transparent, #10b981, transparent); }
+  .pkg-col.pkg-next::before  { background: linear-gradient(90deg, transparent, var(--vibe-pink), transparent); }
+
+  .pkg-col-head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13.5px;
+    font-weight: 800;
+    color: var(--text);
+    margin-bottom: 8px;
+    letter-spacing: -0.01em;
+  }
+  .pkg-col-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2.5px;
+    font-weight: 800;
+    padding: 3px 9px;
+    border-radius: 100px;
+    color: #10b981;
+    background: rgba(16, 185, 129, 0.14);
+    border: 1px solid rgba(16, 185, 129, 0.5);
+  }
+  .pkg-col-tag.tag-next {
+    color: var(--vibe-pink);
+    background: rgba(236, 72, 153, 0.14);
+    border-color: rgba(236, 72, 153, 0.55);
+  }
+  .pkg-col-list {
+    margin: 0; padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  .pkg-col-list li {
+    position: relative;
+    padding-left: 16px;
+    font-size: 12.5px;
+    line-height: 1.5;
+    color: var(--text);
+  }
+  .pkg-col-list li::before {
+    content: '';
+    position: absolute;
+    left: 2px; top: 8px;
+    width: 6px; height: 6px;
+    border-radius: 2px;
+    background: var(--bullet, #10b981);
+    box-shadow: 0 0 6px var(--bullet, #10b981);
+  }
+  .pkg-col.pkg-next .pkg-col-list li::before { --bullet: var(--vibe-pink); }
+  .pkg-col-list li code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px;
+    color: var(--vibe-amber);
+    background: rgba(245, 158, 11, 0.10);
+    padding: 1px 6px;
+    border-radius: 4px;
+  }
+
+  @media (max-width: 1100px) {
+    .tech-grid.cols-2, .tech-grid.cols-3, .tech-grid.cols-4 { grid-template-columns: 1fr; }
+    .ws-cols { grid-template-columns: 1fr; }
+    .ws-list { grid-template-columns: 1fr; }
+    .intercept-flow { grid-template-columns: 1fr; }
+    .intercept-step + .intercept-step::before { display: none; }
+    .enrich-row { grid-template-columns: 1fr; gap: 6px; }
+    .sess-dir-illu { grid-template-columns: 1fr; }
+    .tech-split { grid-template-columns: 1fr; }
+    .pkg-flow { grid-template-columns: 1fr; }
+    .pkg-arr { display: none; }
+    .pkg-split { grid-template-columns: 1fr; }
+  }
 </style>
 </head>
 <body>
@@ -3526,6 +4317,1060 @@
         </div>
       </div>
 
+    </div>
+  </div>
+
+  <!-- ═══════════ Slide 6: Tech Stack ═══════════ -->
+  <div class="slide tech-slide" data-index="6">
+    <div class="tech-wrap">
+      <div class="slide-eyebrow"><span class="num">06</span> · TECH STACK</div>
+      <h2 class="slide-title">
+        메이커의 <span class="accent">뼈대</span>
+      </h2>
+      <div class="tech-lede">
+        화려한 추상화 없이 — <span class="hi">단순한 조합으로</span> 굴립니다. <code>Fastify</code> 위에 <code>raw ws</code>, 호스트의 <code>claude</code> 바이너리를 그대로 spawn, <code>SQLite</code> 파일 하나로 상태. 네 가지 축이 한 PC 안에서 맞물려 돕니다.
+      </div>
+
+      <div class="tech-grid cols-2 reveal-step" id="techStackGrid">
+        <!-- Backend -->
+        <div class="tech-card c-purple">
+          <div class="tech-card-head">
+            <div class="tech-card-num">01 · BACKEND</div>
+            <div class="tech-card-badge">runtime</div>
+          </div>
+          <div class="tech-card-title"><span class="accent">Fastify</span> + raw WebSocket</div>
+          <div class="tech-card-desc">
+            <code>@fastify/websocket</code> 단일 <code>/ws</code> 채널. <strong>socket.io 아님</strong> — 순수 ws 위에서 35종 JSON 메시지로 양방향 통신. ESM TypeScript, PM2 로 데몬화.
+          </div>
+          <div class="tech-code"><span class="k">import</span> Fastify <span class="k">from</span> <span class="s">'fastify'</span>;
+<span class="k">import</span> websocket <span class="k">from</span> <span class="s">'@fastify/websocket'</span>;
+<span class="k">const</span> app = <span class="f">Fastify</span>({ logger: <span class="k">true</span> });
+<span class="k">await</span> app.<span class="f">register</span>(websocket);</div>
+          <div class="tech-chips">
+            <span class="tech-chip">fastify</span>
+            <span class="tech-chip">typescript esm</span>
+            <span class="tech-chip">pm2</span>
+          </div>
+        </div>
+
+        <!-- Frontend -->
+        <div class="tech-card c-cyan">
+          <div class="tech-card-head">
+            <div class="tech-card-num">02 · FRONTEND</div>
+            <div class="tech-card-badge">3 SPAs</div>
+          </div>
+          <div class="tech-card-title"><span class="accent">React + Vite</span> · 3 in 1</div>
+          <div class="tech-card-desc">
+            한 백엔드가 <strong>3 개 SPA</strong> 를 prefix 로 나눠 서빙: <code>/</code> (사용자), <code>/admin</code>, <code>/package</code>. 상태는 <code>Zustand</code>, 디자인은 <code>apply-design-system</code> preset.
+          </div>
+          <div class="tech-code"><span class="c">// 한 서버 / 세 빌드 산출물</span>
+GET  <span class="v">/</span>            <span class="c">→ client/dist</span>
+GET  <span class="v">/admin/</span>      <span class="c">→ admin/dist</span>
+GET  <span class="v">/package/</span>    <span class="c">→ package/dist</span></div>
+          <div class="tech-chips">
+            <span class="tech-chip">react</span>
+            <span class="tech-chip">vite</span>
+            <span class="tech-chip">zustand</span>
+          </div>
+        </div>
+
+        <!-- Storage -->
+        <div class="tech-card c-amber">
+          <div class="tech-card-head">
+            <div class="tech-card-num">03 · STORAGE</div>
+            <div class="tech-card-badge">SQLite</div>
+          </div>
+          <div class="tech-card-title"><span class="accent">파일 하나</span> 가 곧 상태</div>
+          <div class="tech-card-desc">
+            <code>data/apply-maker.db</code> 단일 파일. 사용자·역할·세션·대화 로그·디바이스 토큰까지 — <strong>외부 DB 의존성 0</strong>. 백업은 파일 복사 한 줄.
+          </div>
+          <div class="tech-code">data/
+└── apply-maker.db   <span class="c">// users · roles</span>
+                     <span class="c">// sessions · conversations</span>
+                     <span class="c">// devices · attachments</span></div>
+          <div class="tech-chips">
+            <span class="tech-chip">better-sqlite3</span>
+            <span class="tech-chip">single file</span>
+            <span class="tech-chip">no migration runner</span>
+          </div>
+        </div>
+
+        <!-- Engine -->
+        <div class="tech-card c-pink">
+          <div class="tech-card-head">
+            <div class="tech-card-num">04 · ENGINE</div>
+            <div class="tech-card-badge">CLI</div>
+          </div>
+          <div class="tech-card-title"><span class="accent">claude</span> 바이너리 그대로</div>
+          <div class="tech-card-desc">
+            <code>@anthropic-ai/claude-code</code> 를 호스트에 설치하고 그대로 <strong><code>child_process.spawn</code></strong>. SDK 래퍼·자체 chat-loop 구현 안 함 — CLI 의 <code>--resume</code>·<code>--output-format stream-json</code> 만 활용.
+          </div>
+          <div class="tech-code"><span class="k">spawn</span>(<span class="s">'claude'</span>, [
+  <span class="s">'--model'</span>, model,
+  <span class="s">'--output-format'</span>, <span class="s">'stream-json'</span>,
+  <span class="s">'--verbose'</span>, <span class="s">'-p'</span>, prompt,
+  <span class="s">'--resume'</span>, sessionId,
+])</div>
+          <div class="tech-chips">
+            <span class="tech-chip">claude-code cli</span>
+            <span class="tech-chip">stream-json</span>
+            <span class="tech-chip">--resume</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════ Slide 7: claude-code 실행 방식 ═══════════ -->
+  <div class="slide tech-slide" data-index="7">
+    <div class="tech-wrap">
+      <div class="slide-eyebrow"><span class="num">07</span> · CLAUDE CLI</div>
+      <h2 class="slide-title">
+        claude 를 <span class="accent">어떻게 굴리나</span>
+      </h2>
+      <div class="tech-lede">
+        SDK 도, PTY 도 아닙니다. <span class="hi">호스트 바이너리를 그대로 spawn</span> 해서 stdout 을 줄 단위로 끊고, 각 줄을 JSON 으로 파싱해 이벤트로 흘립니다. 단순하지만 — 그래서 안 깨집니다.
+      </div>
+
+      <div class="tech-split reveal-step" id="claudeExecSplit">
+        <!-- Left: code -->
+        <div class="tech-split-block">
+          <h4>// claudeProcess.ts</h4>
+          <div class="tech-code"><span class="k">import</span> { spawn } <span class="k">from</span> <span class="s">'node:child_process'</span>;
+<span class="k">const</span> proc = <span class="f">spawn</span>(<span class="s">'claude'</span>, [
+  <span class="s">'--model'</span>, model,
+  <span class="s">'--output-format'</span>, <span class="s">'stream-json'</span>,
+  <span class="s">'--verbose'</span>,
+  <span class="s">'-p'</span>, prompt,
+  <span class="s">'--resume'</span>, claudeSessionId,   <span class="c">// 2턴부터</span>
+], {
+  cwd: sessionWorkDir,              <span class="c">// 세션 폴더</span>
+  stdio: [<span class="s">'ignore'</span>, <span class="s">'pipe'</span>, <span class="s">'pipe'</span>],
+  env: { ...process.env,
+    FORCE_COLOR: <span class="s">'0'</span>,           <span class="c">// 색 차단</span>
+    CLAUDE_CODE_*: <span class="s">''</span>,
+  },
+});
+<span class="c">// stdout: 줄단위 JSON</span>
+<span class="k">let</span> buf = <span class="s">''</span>;
+proc.stdout.<span class="f">on</span>(<span class="s">'data'</span>, chunk => {
+  buf += chunk;
+  <span class="k">const</span> lines = buf.<span class="f">split</span>(<span class="s">'\n'</span>);
+  buf = lines.<span class="f">pop</span>()!;           <span class="c">// 부분 줄 보관</span>
+  <span class="k">for</span> (<span class="k">const</span> line <span class="k">of</span> lines) {
+    emitter.<span class="f">emit</span>(<span class="s">'data'</span>, <span class="f">JSON.parse</span>(line));
+  }
+});</div>
+        </div>
+
+        <!-- Right: notes -->
+        <div class="tech-split-block">
+          <h4>// 핵심 결정</h4>
+          <ul>
+            <li><strong>PTY 아님</strong> — <code>node-pty</code> 도, <code>tmux</code> 도 안 씁니다. 단순 <code>spawn</code> + <code>stdio: pipe</code>. claude 가 TTY 가 없어도 <code>-p</code> + <code>stream-json</code> 모드로 깔끔히 출력.</li>
+            <li><strong>줄 단위 line splitter</strong> — chunk 가 줄 중간에서 잘릴 수 있어, 마지막 부분 줄(<code>buf</code>)을 보관 후 다음 chunk 에 이어붙입니다.</li>
+            <li><strong>각 줄 = 하나의 JSON 이벤트</strong> — <code>tool_use</code>, <code>text</code>, <code>thinking</code>, <code>result</code> 같은 type 필드로 구분. 그대로 WebSocket 으로 broadcast.</li>
+            <li><strong>색·진행바 차단</strong> — <code>FORCE_COLOR=0</code> + <code>CLAUDE_CODE_*</code> env 를 모두 비워 ANSI 코드가 stream-json 을 깨뜨리지 않게.</li>
+            <li><strong>abort = SIGTERM → 5s → SIGKILL</strong> — 사용자 중단 시 우아하게 끄려 시도, 안 죽으면 강제.</li>
+            <li><strong>2 턴부터 <code>--resume</code></strong> — 첫 prompt 는 새 세션, 그 뒤로는 claude 가 발급한 sessionId 로 이어가기.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tech-caption reveal-step">
+        <div class="tech-caption-label">SIMPLE</div>
+        <div class="tech-caption-text">
+          SDK 도, 자체 chat-loop 도 없습니다. <span class="hi">CLI 한 줄</span> 위에 얇은 line-parser 만 — 깨질 데가 없는 게 미덕.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════ Slide 8: 세션 격리 ═══════════ -->
+  <div class="slide tech-slide" data-index="8">
+    <div class="tech-wrap">
+      <div class="slide-eyebrow"><span class="num">08</span> · SESSION ISOLATION</div>
+      <h2 class="slide-title">
+        세션마다 <span class="accent">자기 작업장</span>
+      </h2>
+      <div class="tech-lede">
+        사용자 A 의 작업이 사용자 B 에게 새지 않으려면 — <span class="hi">파일 시스템부터 갈라야</span> 합니다. 세션이 생기면 <code>git clone</code>, 끝나면 통째로 <code>rm -rf</code>. 사용자 개인 작업 폴더는 절대 안 만집니다.
+      </div>
+
+      <div class="sess-dir-illu reveal-step" id="sessDirIllu">
+        <div class="sess-tree"><span class="root">~/Projects/.sessions/</span>
+├── <span class="sid">a7f3-c821</span>/        <span class="com"># 세션 1</span>
+│   └── <span class="proj">apply-cert/</span>
+│       ├── src/...
+│       ├── apply-docs/      <span class="com"># submodule auto-init</span>
+│       └── .git/
+│           └── hooks/
+│               └── <span class="hook">pre-push</span>  <span class="com"># 자동 설치</span>
+├── <span class="sid">b9d2-ee15</span>/        <span class="com"># 세션 2 — 다른 사용자</span>
+│   └── <span class="proj">apply-api-gateway/</span>
+│       └── ...
+└── <span class="sid">c4e8-7733</span>/        <span class="com"># viewer 세션 (read-only)</span>
+    └── <span class="proj">apply-cert/</span>
+        └── <span class="hook">CLAUDE.md</span>     <span class="com"># role-aware 자동 주입</span></div>
+
+        <div class="sess-notes">
+          <div class="sess-note">
+            <div class="ico">📁</div>
+            <div class="sess-note-text">
+              <strong>세션마다 새 clone</strong> — <code>~/Projects/&lt;projectName&gt;</code> 의 사용자 작업 폴더와 완전히 분리. 한 사람의 미커밋 변경이 다른 세션에 새지 않습니다.
+            </div>
+          </div>
+          <div class="sess-note">
+            <div class="ico c">⎘</div>
+            <div class="sess-note-text">
+              <strong>submodule 자동 init</strong> — <code>apply-docs</code> 같은 공통 의존도 자동으로 끌어와 remote 최신 상태로 update.
+            </div>
+          </div>
+          <div class="sess-note">
+            <div class="ico p">↑</div>
+            <div class="sess-note-text">
+              <strong><code>pre-push</code> hook 자동 설치</strong> — push 직전 submodule sync 까지 알아서. AI 가 잊어도 hook 이 챙깁니다.
+            </div>
+          </div>
+          <div class="sess-note">
+            <div class="ico a">✕</div>
+            <div class="sess-note-text">
+              <strong>세션 종료 / 서버 재시작 시 rm -rf</strong> — 작업 폴더 leak 이 0. 다시 시작해도 깨끗한 상태에서 출발.
+            </div>
+          </div>
+          <div class="sess-note">
+            <div class="ico">📜</div>
+            <div class="sess-note-text">
+              <strong>role-aware <code>CLAUDE.md</code> 자동 주입</strong> — <code>viewer</code> 는 fs 쓰기 금지, <code>user</code> 는 schema/infra/.env 금지. 세션 폴더 루트에 작성돼 모델이 항상 읽고 시작.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tech-caption reveal-step">
+        <div class="tech-caption-label">ISOLATION</div>
+        <div class="tech-caption-text">
+          격리는 정책이 아니라 <span class="hi">디렉토리 구조</span> 로 합니다 — 셀이 따로 있으면, 사고는 그 셀 안에서 멈춥니다.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════ Slide 9: WS Protocol ═══════════ -->
+  <div class="slide tech-slide" data-index="9">
+    <div class="tech-wrap">
+      <div class="slide-eyebrow"><span class="num">09</span> · WS PROTOCOL</div>
+      <h2 class="slide-title">
+        단일 <span class="accent">/ws</span> 위의 35종 약속
+      </h2>
+      <div class="tech-lede">
+        REST 엔드포인트 35 개 대신 — <span class="hi">웹소켓 하나에 type 필드로 분기</span>. 첫 필드만 보면 무엇이 들어왔는지 알 수 있고, 한 채널이라 attach·detach 모델로 <strong>여러 클라이언트가 같은 세션을 동시에 관전</strong> 할 수 있습니다.
+      </div>
+
+      <div class="ws-msg-shape reveal-step" id="wsShape">
+        <pre><span class="k">{</span> <span class="s">"type"</span>: <span class="s">"prompt"</span>, <span class="s">"sessionId"</span>: <span class="s">"a7f3-c821"</span>, <span class="s">"text"</span>: <span class="s">"버튼 색 바꿔줘"</span> <span class="k">}</span></pre>
+        <div class="ws-msg-note">type 필드로 모든 분기</div>
+      </div>
+
+      <div class="ws-cols reveal-step" id="wsCols">
+        <!-- Client → Server -->
+        <div class="ws-col c2s">
+          <div class="ws-col-head">
+            <div class="ws-col-arrow">CLIENT → SERVER</div>
+            <div class="ws-col-count">17 types</div>
+          </div>
+          <ul class="ws-list">
+            <li class="hi">auth</li>
+            <li class="hi">prompt</li>
+            <li>abort</li>
+            <li>attach</li>
+            <li>detach</li>
+            <li>response_ack</li>
+            <li>ultra_execute</li>
+            <li>ultra_abort</li>
+            <li>night_start</li>
+            <li>night_abort</li>
+            <li>night_status</li>
+            <li>abort_prompt</li>
+            <li>interrupt</li>
+            <li>rename_title</li>
+            <li class="hi">answer_question</li>
+            <li>docs_execute</li>
+            <li>docs_abort</li>
+          </ul>
+        </div>
+
+        <!-- Server → Client -->
+        <div class="ws-col s2c">
+          <div class="ws-col-head">
+            <div class="ws-col-arrow">SERVER → CLIENT</div>
+            <div class="ws-col-count">18 types</div>
+          </div>
+          <ul class="ws-list">
+            <li class="hi">auth_ok</li>
+            <li class="hi">stream</li>
+            <li>session_ended</li>
+            <li>attached</li>
+            <li>ultra_phase</li>
+            <li>ultra_checklist</li>
+            <li>ultra_complete</li>
+            <li>suggestions</li>
+            <li>night_progress</li>
+            <li>night_task_start</li>
+            <li>night_task_done</li>
+            <li>night_quality_gate</li>
+            <li>night_complete</li>
+            <li>title_changed</li>
+            <li>session_created</li>
+            <li>session_deleted</li>
+            <li class="hi">user_question</li>
+            <li>error</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tech-grid cols-3 reveal-step" id="wsBenefits">
+        <div class="tech-card c-cyan">
+          <div class="tech-card-num">A · ATTACH</div>
+          <div class="tech-card-title">다중 attach</div>
+          <div class="tech-card-desc">한 세션에 <strong>여러 클라이언트</strong> 가 동시에 붙을 수 있습니다. admin 이 일반 사용자 세션을 관전하면서 stream 을 같이 받기.</div>
+        </div>
+        <div class="tech-card c-purple">
+          <div class="tech-card-num">B · BROADCAST</div>
+          <div class="tech-card-title">role 기반 broadcast</div>
+          <div class="tech-card-desc"><code>admin</code> 은 모든 세션 이벤트 수신, 일반 사용자는 <strong>본인 소유 세션만</strong>. <code>canUserAccessSession</code> 으로 매 요청마다 가드.</div>
+        </div>
+        <div class="tech-card c-pink">
+          <div class="tech-card-num">C · WRITE GUARD</div>
+          <div class="tech-card-title">viewer 차단</div>
+          <div class="tech-card-desc"><code>WRITE_ACTIONS</code> 셋(<code>prompt</code> · <code>abort</code> · <code>ultra_*</code> 등)에 들어가는 type 은 <strong>viewer 역할에서는 거부</strong>. 관전만 허용.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════ Slide 10: Prompt Enrichment ═══════════ -->
+  <div class="slide tech-slide" data-index="10">
+    <div class="tech-wrap">
+      <div class="slide-eyebrow"><span class="num">10</span> · CONTEXT PIPELINE</div>
+      <h2 class="slide-title">
+        한 줄을 <span class="accent">6 겹 컨텍스트</span> 로
+      </h2>
+      <div class="tech-lede">
+        사용자가 "버튼 색 바꿔줘" 한 줄을 던지면, 메이커가 그 위에 <span class="hi">여섯 겹의 컨텍스트</span> 를 자동으로 합성해 claude 에게 넘깁니다. AX 의 진짜 속살 — 여기가 메이커를 메이커답게 만드는 자리입니다.
+      </div>
+
+      <div class="enrich-stack reveal-step" id="enrichStack">
+        <div class="enrich-row r1">
+          <div class="enrich-tag">&lt;persona&gt;</div>
+          <div class="enrich-desc"><strong>역할별 인격 부여</strong> — <code>config.persona</code> 에서 role 에 맞는 페르소나 텍스트 합성. user 면 "동료처럼", viewer 면 "안내자처럼".</div>
+        </div>
+        <div class="enrich-row r2">
+          <div class="enrich-tag">&lt;user-context&gt;</div>
+          <div class="enrich-desc"><strong>누가 묻는지</strong> — DB 에서 이름·역할·현재 프로젝트·접근 가능한 프로젝트 목록을 끌어와 첨부. "박영진(admin) · apply-cert"</div>
+        </div>
+        <div class="enrich-row r3">
+          <div class="enrich-tag">&lt;previous-conversations&gt;</div>
+          <div class="enrich-desc"><strong>최근 5 개 대화 로그</strong> — conversation_log 테이블에서. 새 세션이라도 이전 맥락을 자연스럽게 이어가게.</div>
+        </div>
+        <div class="enrich-row r4">
+          <div class="enrich-tag">&lt;attached-files&gt;</div>
+          <div class="enrich-desc"><strong>업로드 첨부</strong> — multipart 로 받아둔 파일들에 대해 "<code>Read</code> 도구로 확인하세요" 라고 명시. 모델이 자동으로 fetch.</div>
+        </div>
+        <div class="enrich-row r5">
+          <div class="enrich-tag">&lt;jabis-ecosystem-context&gt;</div>
+          <div class="enrich-desc"><strong>핵심 — <code>ContextResolver</code></strong> 가 프롬프트 텍스트에서 <code>oauth</code>·<code>스키마</code>·<code>helm</code> 같은 키워드를 detect → 관련 jabis-* 프로젝트의 docs/CLAUDE.md/API spec/DB 스키마를 <strong>토큰 예산 안에서 자동 첨부</strong>.</div>
+        </div>
+        <div class="enrich-row r6">
+          <div class="enrich-tag">&lt;suggestion-instruction&gt;</div>
+          <div class="enrich-desc"><strong>후속 질문 3 개</strong> 를 요청 — 답변 끝에 <code>[SUGGESTIONS]A|B|C[/SUGGESTIONS]</code> 형식으로. 클라이언트는 이걸 잘라서 칩으로 뿌립니다.</div>
+        </div>
+      </div>
+
+      <div class="enrich-final reveal-step">
+        사용자 입력 한 줄 <span class="arrow">+</span> 6 layers <span class="arrow">→</span> <code>claude</code> 에 한 번에 합성 전달
+      </div>
+
+      <div class="tech-caption reveal-step">
+        <div class="tech-caption-label">AX CORE</div>
+        <div class="tech-caption-text">
+          모델이 똑똑한 게 아니라 — <span class="hi">컨텍스트가 똑똑한</span> 것입니다. ContextResolver 가 메이커의 진짜 엔진.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════ Slide 11: AskUserQuestion 인터셉트 ═══════════ -->
+  <div class="slide tech-slide" data-index="11">
+    <div class="tech-wrap">
+      <div class="slide-eyebrow"><span class="num">11</span> · INTERCEPT</div>
+      <h2 class="slide-title">
+        claude 의 질문을 <span class="accent">가로채다</span>
+      </h2>
+      <div class="tech-lede">
+        claude 가 사용자에게 묻고 싶을 때 쓰는 <code>AskUserQuestion</code> 툴. 보통은 터미널에서 라디오 UI 로 뜨지만 — 메이커는 stream 에서 이걸 <span class="hi">가로채서 웹 UI 의 라디오·체크박스로 변환</span> 합니다.
+      </div>
+
+      <div class="intercept-flow reveal-step" id="interceptFlow">
+        <div class="intercept-step s1">
+          <div class="intercept-num">STEP 01</div>
+          <div class="intercept-title">claude 가 질문 시도</div>
+          <div class="intercept-desc">stream 에 <code>tool_use:&nbsp;AskUserQuestion</code> 이벤트 출력. 옵션 배열·multiSelect 여부 포함.</div>
+        </div>
+        <div class="intercept-step s2">
+          <div class="intercept-num">STEP 02</div>
+          <div class="intercept-title">즉시 프로세스 kill</div>
+          <div class="intercept-desc">line-parser 가 이 이벤트를 감지하는 순간 <code>proc.kill()</code> — claude 가 sandbox 답변을 자동 생성하기 전에 끊습니다.</div>
+        </div>
+        <div class="intercept-step s3">
+          <div class="intercept-num">STEP 03</div>
+          <div class="intercept-title">user_question 푸시</div>
+          <div class="intercept-desc">WebSocket 으로 <code>user_question</code> 메시지를 클라이언트에 broadcast. 옵션을 그대로 들고감.</div>
+        </div>
+        <div class="intercept-step s4">
+          <div class="intercept-num">STEP 04</div>
+          <div class="intercept-title">웹 UI 에서 답변</div>
+          <div class="intercept-desc">사용자가 라디오/체크박스로 클릭. 클라이언트가 <code>answer_question</code> ws 메시지로 다시 서버에.</div>
+        </div>
+        <div class="intercept-step s5">
+          <div class="intercept-num">STEP 05</div>
+          <div class="intercept-title">--resume 으로 재개</div>
+          <div class="intercept-desc">서버가 답변을 합성해 새 prompt 로 <code>--resume</code> spawn. claude 는 자기가 물어본 질문에 답이 돌아왔다고 인식.</div>
+        </div>
+      </div>
+
+      <div class="tech-caption reveal-step">
+        <div class="tech-caption-label">UX BRIDGE</div>
+        <div class="tech-caption-text">
+          CLI 의 대화형 질문이 <span class="hi">웹의 라디오·체크박스</span> 로 — 같은 모델, 다른 인터페이스. 비개발자도 자연스럽게.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════ Slide 12: 실행 모드 4종 ═══════════ -->
+  <div class="slide tech-slide" data-index="12">
+    <div class="tech-wrap">
+      <div class="slide-eyebrow"><span class="num">12</span> · EXEC MODES</div>
+      <h2 class="slide-title">
+        한 모델, <span class="accent">네 가지 실행 패턴</span>
+      </h2>
+      <div class="tech-lede">
+        같은 claude 를 굴려도 — 일하는 방식은 모드별로 다릅니다. <span class="hi">모드마다 전용 executor 클래스</span> 가 있어 phase·체크리스트·quality gate 같은 진행 상황을 ws 로 broadcast 합니다.
+      </div>
+
+      <div class="tech-grid cols-2 reveal-step" id="execModes">
+        <div class="tech-card c-cyan">
+          <div class="tech-card-head">
+            <div class="tech-card-num">MODE 01</div>
+            <div class="tech-card-badge">default</div>
+          </div>
+          <div class="tech-card-title"><span class="accent">interactive</span></div>
+          <div class="tech-card-desc">
+            일반 멀티턴 — <code>--resume</code> 으로 이어갑니다. 사용자 ↔ claude 가 한 prompt 씩 주고받는 클래식 패턴. <strong>대부분의 작업이 이 모드</strong>.
+          </div>
+          <div class="tech-chips">
+            <span class="tech-chip">multi-turn</span>
+            <span class="tech-chip">--resume</span>
+            <span class="tech-chip">stream</span>
+          </div>
+        </div>
+
+        <div class="tech-card c-purple">
+          <div class="tech-card-head">
+            <div class="tech-card-num">MODE 02</div>
+            <div class="tech-card-badge">UltraExecutor</div>
+          </div>
+          <div class="tech-card-title"><span class="accent">ultra_execute</span></div>
+          <div class="tech-card-desc">
+            <strong>페이즈·체크리스트 기반</strong> 단계 실행. plan → 분석 → 구현 → 검증 같은 phase 가 순차로 돌고, 각 단계에서 ws 로 <code>ultra_phase</code> · <code>ultra_checklist</code> 진행률 broadcast.
+          </div>
+          <div class="tech-chips">
+            <span class="tech-chip">phased</span>
+            <span class="tech-chip">checklist</span>
+            <span class="tech-chip">live progress</span>
+          </div>
+        </div>
+
+        <div class="tech-card c-pink">
+          <div class="tech-card-head">
+            <div class="tech-card-num">MODE 03</div>
+            <div class="tech-card-badge">NightExecutor</div>
+          </div>
+          <div class="tech-card-title"><span class="accent">night_start</span></div>
+          <div class="tech-card-desc">
+            야간 자동화 배치. 여러 task 를 줄세워 돌리며 — <strong>quality gate 를 통과해야 다음 task</strong>. 실패 task 는 재시도 큐로, 통과한 변경은 push 까지 자동.
+          </div>
+          <div class="tech-chips">
+            <span class="tech-chip">batch</span>
+            <span class="tech-chip">quality gate</span>
+            <span class="tech-chip">auto push</span>
+          </div>
+        </div>
+
+        <div class="tech-card c-amber">
+          <div class="tech-card-head">
+            <div class="tech-card-num">MODE 04</div>
+            <div class="tech-card-badge">DocsExecutor</div>
+          </div>
+          <div class="tech-card-title"><span class="accent">docs_execute</span></div>
+          <div class="tech-card-desc">
+            문서 모드 — 별도 페이즈로 진행. 코드 대신 <code>apply-docs</code> · <code>CLAUDE.md</code> 같은 문서 산출물을 생성하고 검증. 룰북·런북 같은 가치 자산을 AI 로 갱신.
+          </div>
+          <div class="tech-chips">
+            <span class="tech-chip">docs only</span>
+            <span class="tech-chip">apply-docs</span>
+            <span class="tech-chip">validation</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tech-caption reveal-step">
+        <div class="tech-caption-label">PATTERNS</div>
+        <div class="tech-caption-text">
+          같은 엔진을 <span class="hi">네 가지 모양</span> 으로 굴리는 것 — 그게 메이커가 "그냥 채팅 UI" 와 다른 이유.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════ Slide 13: 가드레일·보안 ═══════════ -->
+  <div class="slide tech-slide" data-index="13">
+    <div class="tech-wrap">
+      <div class="slide-eyebrow"><span class="num">13</span> · GUARDRAILS</div>
+      <h2 class="slide-title">
+        구현 레벨 <span class="accent">가드레일</span>
+      </h2>
+      <div class="tech-lede">
+        하네스 엔지니어링(정책 레벨)이 "어떤 길을 깔까" 였다면, 여기는 <span class="hi">코드로 박힌 가드레일</span>. JWT, 디바이스 토큰, 3-tier 권한, 세션별 CLAUDE.md, 자동 폴백까지 — 운영하면서 신경 쓴 것들.
+      </div>
+
+      <div class="tech-grid cols-3 reveal-step" id="guardCards">
+        <div class="tech-card c-cyan">
+          <div class="tech-card-num">G · 01</div>
+          <div class="tech-card-title"><span class="accent">JWT</span> 액세스 토큰</div>
+          <div class="tech-card-desc">
+            로그인 시 발급된 JWT 를 <strong>HttpOnly 쿠키</strong> + ws 첫 <code>auth</code> 메시지에 동시에 들어가게. 만료되면 ws 가 자동 단절.
+          </div>
+        </div>
+        <div class="tech-card c-purple">
+          <div class="tech-card-num">G · 02</div>
+          <div class="tech-card-title"><span class="accent">디바이스 토큰</span></div>
+          <div class="tech-card-desc">
+            <code>admin</code> SPA 는 <strong>Vault-style 시크릿</strong> 을 1 회 입력해 활성화한 디바이스에서만 접근 가능. 토큰은 SQLite 에 hash 로 저장.
+          </div>
+        </div>
+        <div class="tech-card c-amber">
+          <div class="tech-card-num">G · 03</div>
+          <div class="tech-card-title">3-tier <span class="accent">role</span></div>
+          <div class="tech-card-desc">
+            <code>admin</code> · <code>user</code> · <code>viewer</code>. role 에 따라 ws 의 17 종 client 메시지 중 <strong>WRITE_ACTIONS</strong> 셋에 들어가면 자동 거부.
+          </div>
+        </div>
+        <div class="tech-card c-pink">
+          <div class="tech-card-num">G · 04</div>
+          <div class="tech-card-title">세션 <span class="accent">CLAUDE.md</span></div>
+          <div class="tech-card-desc">
+            세션 폴더 루트에 role 별 룰북 자동 작성. <code>viewer</code> = fs 쓰기 금지, <code>user</code> = schema/infra/.env 금지. 모델이 시작 시 읽고 따름.
+          </div>
+        </div>
+        <div class="tech-card c-blue">
+          <div class="tech-card-num">G · 05</div>
+          <div class="tech-card-title">세션 <span class="accent">소유권</span> 체크</div>
+          <div class="tech-card-desc">
+            <code>canUserAccessSession()</code> 이 <strong>모든 ws 요청 앞단</strong> 에서 호출. 본인 소유가 아니면 attach/prompt 다 거부.
+          </div>
+        </div>
+        <div class="tech-card c-cyan">
+          <div class="tech-card-num">G · 06</div>
+          <div class="tech-card-title">Resume <span class="accent">자동 폴백</span></div>
+          <div class="tech-card-desc">
+            <code>--resume</code> 이 <code>No conversation found</code> 로 실패하면 자동으로 <strong>새 세션으로 재시작</strong>. claude 캐시 정리 후에도 사용자는 모름.
+          </div>
+        </div>
+      </div>
+
+      <div class="tech-grid cols-3 reveal-step" id="guardCards2">
+        <div class="tech-card c-purple">
+          <div class="tech-card-num">G · 07</div>
+          <div class="tech-card-title">rate <span class="accent">limit</span></div>
+          <div class="tech-card-desc">
+            동일 user 당 동시 실행 세션·분당 prompt 횟수 제한. claude 가 무한루프성 작업에 빠져도 비용·시간이 폭주하지 않도록.
+          </div>
+        </div>
+        <div class="tech-card c-amber">
+          <div class="tech-card-num">G · 08</div>
+          <div class="tech-card-title">Multipart <span class="accent">upload cap</span></div>
+          <div class="tech-card-desc">
+            첨부 파일 size·count 상한. claude 가 거대 파일을 통째로 <code>Read</code> 하다가 컨텍스트 폭발하는 사고 차단.
+          </div>
+        </div>
+        <div class="tech-card c-pink">
+          <div class="tech-card-num">G · 09</div>
+          <div class="tech-card-title">git token <span class="accent">scope 제한</span></div>
+          <div class="tech-card-desc">
+            세션 폴더에 주입되는 git token 은 <strong>apply-* · feature/*</strong> 범위만. main 보호 + org admin 차단 — 슬라이드 5 에서 본 정책의 구현부.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════ Slide 14: 부수 기능 ═══════════ -->
+  <div class="slide tech-slide" data-index="14">
+    <div class="tech-wrap">
+      <div class="slide-eyebrow"><span class="num">14</span> · EXTRAS</div>
+      <h2 class="slide-title">
+        그 밖에 <span class="accent">붙어 있는 것들</span>
+      </h2>
+      <div class="tech-lede">
+        본체 외에 — 메이커가 "그냥 굴러간다" 가 아니라 <span class="hi">"꾸준히 굴러간다"</span> 가 되게 해주는 잡다한 기능들. 발표 시간이 남으면 한 마디씩 짚을 자리입니다.
+      </div>
+
+      <div class="tech-grid cols-3 reveal-step" id="extraCards">
+        <div class="tech-card c-cyan">
+          <div class="tech-card-num">EX · 01</div>
+          <div class="tech-card-title"><span class="accent">reportGenerator</span></div>
+          <div class="tech-card-desc">
+            일·주간 작업 리포트를 claude 가 자동 생성. 어떤 세션이 무엇을 만들었는지, 어디서 멈췄는지를 한 페이지로 요약 → <strong>이메일·Teams 자동 발송</strong>.
+          </div>
+          <div class="tech-chips">
+            <span class="tech-chip">scheduler</span>
+            <span class="tech-chip">daily / weekly</span>
+          </div>
+        </div>
+
+        <div class="tech-card c-purple">
+          <div class="tech-card-num">EX · 02</div>
+          <div class="tech-card-title"><span class="accent">EmailNotifier</span></div>
+          <div class="tech-card-desc">
+            작업 완료·실패·quality gate 통과 이벤트를 메일로. 사용자가 night 모드를 걸어두고 자도, 아침에 결과를 받아볼 수 있게.
+          </div>
+          <div class="tech-chips">
+            <span class="tech-chip">nodemailer</span>
+            <span class="tech-chip">smtp</span>
+          </div>
+        </div>
+
+        <div class="tech-card c-pink">
+          <div class="tech-card-num">EX · 03</div>
+          <div class="tech-card-title"><span class="accent">TeamsNotifier</span></div>
+          <div class="tech-card-desc">
+            Microsoft Teams Incoming Webhook 으로 같은 이벤트를 방으로. 팀 단위 가시성 — 누가 무엇을 만들고 있는지 옆자리에서 안다.
+          </div>
+          <div class="tech-chips">
+            <span class="tech-chip">teams webhook</span>
+            <span class="tech-chip">adaptive card</span>
+          </div>
+        </div>
+
+        <div class="tech-card c-amber">
+          <div class="tech-card-num">EX · 04</div>
+          <div class="tech-card-title"><span class="accent">sessionSummarizer</span></div>
+          <div class="tech-card-desc">
+            세션 첫 prompt 가 끝나면 별도 claude 콜로 <strong>세션 제목을 자동 생성</strong>. "버튼 색 변경" / "OAuth 추가" 식으로 — 사이드바에 의미가 보이게.
+          </div>
+          <div class="tech-chips">
+            <span class="tech-chip">title gen</span>
+            <span class="tech-chip">async</span>
+          </div>
+        </div>
+
+        <div class="tech-card c-blue">
+          <div class="tech-card-num">EX · 05</div>
+          <div class="tech-card-title"><span class="accent">deployManager</span></div>
+          <div class="tech-card-desc">
+            메이커 본인의 배포 트리거. 코드 변경 push 시 파이프라인 → <strong>메이커 자체가 자기를 재배포</strong>. 셀프 호스팅의 자생력.
+          </div>
+          <div class="tech-chips">
+            <span class="tech-chip">self-deploy</span>
+            <span class="tech-chip">pipeline trigger</span>
+          </div>
+        </div>
+
+        <div class="tech-card c-cyan">
+          <div class="tech-card-num">EX · 06</div>
+          <div class="tech-card-title"><span class="accent">preview route</span></div>
+          <div class="tech-card-desc">
+            세션이 빌드한 SPA 의 <code>dist/</code> 를 <code>/preview/&lt;project&gt;/</code> 로 미리보기. <strong>referer 기반 절대경로 fallback</strong> 까지 — 라우팅이 깊어도 깨지지 않게.
+          </div>
+          <div class="tech-chips">
+            <span class="tech-chip">preview</span>
+            <span class="tech-chip">spa fallback</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tech-caption reveal-step">
+        <div class="tech-caption-label">OPS</div>
+        <div class="tech-caption-text">
+          반쯤은 본체, 반쯤은 <span class="hi">운영 도구</span>. 메이커가 살아 있게 하는 건 결국 — 알람과 리포트와 self-deploy.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════ Slide 15: Admin 콘솔 · 감시와 감사 (merged) ═══════════ -->
+  <div class="slide tech-slide" data-index="15">
+    <div class="tech-wrap">
+      <div class="slide-eyebrow"><span class="num">15</span> · ADMIN CONSOLE</div>
+      <h2 class="slide-title">
+        관리자 콘솔 — 모두 <span class="accent">보이고</span>, 모두 <span class="accent">남는다</span>
+      </h2>
+      <div class="tech-lede">
+        메이커는 <code>/admin</code> 아래 <strong>별도 SPA</strong>를 띄웁니다. <span class="hi">디바이스 토큰 + JWT</span> 이중 게이트로 진입하고, 그 뒤로는 모든 prompt 가 흔적을 남깁니다.
+      </div>
+
+      <div class="tech-split reveal-step" style="display:grid;grid-template-columns:1.05fr 1fr;gap:14px;width:100%;align-items:stretch;">
+        <div class="tech-split-block" style="background:rgba(22,20,42,0.74);border:1px solid rgba(168,85,247,0.26);border-radius:14px;padding:14px 18px;display:flex;flex-direction:column;gap:8px;">
+          <div class="tech-card-num" style="color:var(--vibe-cyan);letter-spacing:3px;">DEVICE TOKEN · 한 번 잠그기</div>
+          <div class="tech-card-title" style="font-size:16px;">관리자만의 <span style="color:var(--vibe-cyan);">기기 화이트리스트</span></div>
+<pre class="tech-code" style="margin-top:4px;">// 1. 최초 등록 — secret 1회 입력
+POST /api/admin/activate
+{ "secret": "$ADMIN_BOOTSTRAP_SECRET" }
+  ↓
+{ "deviceToken": "&lt;uuid&gt;" }   // localStorage 저장
+
+// 2. 이후 모든 admin 요청 헤더에
+GET /api/admin/online
+X-Device-Token: &lt;uuid&gt;
+Authorization: Bearer &lt;jwt&gt;
+  ↓
+device-tokens.json 매칭 실패 시 403</pre>
+          <div class="tech-card-desc" style="margin-top:auto;">
+            secret 이 새어도 <strong>등록된 기기</strong>에서만 콘솔이 열립니다. 토큰은 파일 기반 — 회수도 한 줄.
+          </div>
+        </div>
+
+        <div class="tech-split-block" style="background:rgba(22,20,42,0.74);border:1px solid rgba(168,85,247,0.26);border-radius:14px;padding:14px 18px;display:flex;flex-direction:column;gap:8px;">
+          <div class="tech-card-num" style="color:var(--vibe-purple);letter-spacing:3px;">3-TIER · 권한 매트릭스</div>
+          <div class="tech-card-title" style="font-size:16px;">역할별로 <span style="color:var(--vibe-purple);">행위를 끊어둔다</span></div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--text-dim);line-height:1.7;border-top:1px dashed rgba(168,85,247,0.25);padding-top:6px;margin-top:2px;">
+            <div><strong style="color:var(--vibe-pink);">admin</strong>  · 세션 전체 / prompt ✓ / users ✓ / reports ✓</div>
+            <div><strong style="color:var(--vibe-cyan);">user</strong>   · 자기 세션 / prompt ✓ / users ✗ / reports ✗</div>
+            <div><strong style="color:var(--vibe-amber);">viewer</strong> · 자기 세션 / prompt <strong style="color:var(--vibe-pink);">✗</strong> / 읽기 전용</div>
+          </div>
+          <ul style="list-style:none;padding:0;margin:6px 0 0;display:flex;flex-direction:column;gap:5px;color:var(--text-dim);font-size:12px;line-height:1.5;">
+            <li>· <strong style="color:var(--text);">WRITE_ACTIONS</strong> 셋에 들어가면 ws 핸들러 진입부에서 자동 거부</li>
+            <li>· <strong style="color:var(--text);">protected</strong> · <code style="font-family:'JetBrains Mono',monospace;background:rgba(168,85,247,0.15);padding:1px 6px;border-radius:4px;color:var(--vibe-purple);">navskh</code> 계정은 삭제 불가 — 마지막 안전핀</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tech-grid cols-2 reveal-step" id="adminAuditCards" style="margin-top:6px;">
+        <div class="tech-card c-cyan">
+          <div class="tech-card-head">
+            <div class="tech-card-num">AUDIT · 01</div>
+            <div class="tech-card-badge">/api/users</div>
+          </div>
+          <div class="tech-card-title"><span class="accent">사용자 관리</span></div>
+          <div class="tech-card-desc">
+            CRUD · 역할 변경(admin/user/viewer) · 프로젝트 접근 화이트리스트. <strong>비밀번호 초기화·disabled 플래그 시 활성 JWT 전부 폐기</strong>해 즉시 로그아웃.
+          </div>
+          <div class="tech-chips">
+            <span class="tech-chip">action: create | update | delete</span>
+            <span class="tech-chip">disabled flag</span>
+            <span class="tech-chip">project gate</span>
+          </div>
+        </div>
+
+        <div class="tech-card c-purple">
+          <div class="tech-card-head">
+            <div class="tech-card-num">AUDIT · 02</div>
+            <div class="tech-card-badge">/api/admin/online</div>
+          </div>
+          <div class="tech-card-title"><span class="accent">접속자 모니터링</span></div>
+          <div class="tech-card-desc">
+            <code>activeClients</code> 셋 그대로 노출 — 인증된 모든 WS 연결을 사용자·역할·접속 시각·<strong>현재 활성 세션 ID</strong>로 본다. 10 초마다 자동 갱신.
+          </div>
+          <div class="tech-chips">
+            <span class="tech-chip">activeSessionId</span>
+            <span class="tech-chip">auto-refresh 10s</span>
+            <span class="tech-chip">attach / detach 동행</span>
+          </div>
+        </div>
+
+        <div class="tech-card c-amber">
+          <div class="tech-card-head">
+            <div class="tech-card-num">AUDIT · 03</div>
+            <div class="tech-card-badge">/api/admin/logs</div>
+          </div>
+          <div class="tech-card-title"><span class="accent">대화 기록 감사</span></div>
+          <div class="tech-card-desc">
+            모든 prompt/response 가 <code>conversation_logs</code> 에. 사용자·프로젝트·날짜로 필터 → 페이지네이션 → 행 클릭하면 <strong>프롬프트 원문·응답 요약·토큰·소요시간·툴 사용 횟수</strong>까지 펼침.
+          </div>
+          <div class="tech-chips">
+            <span class="tech-chip">pageSize: 20</span>
+            <span class="tech-chip">turn · tokens · duration</span>
+            <span class="tech-chip">tool count</span>
+          </div>
+        </div>
+
+        <div class="tech-card c-pink">
+          <div class="tech-card-head">
+            <div class="tech-card-num">AUDIT · 04</div>
+            <div class="tech-card-badge">sessionManager</div>
+          </div>
+          <div class="tech-card-title"><span class="accent">global broadcast</span></div>
+          <div class="tech-card-desc">
+            <code>setGlobalBroadcast</code> 한 줄에서 분기 — 일반 사용자는 자기 세션만, <strong>admin 에겐 모든 세션 이벤트가 흐른다</strong>. 별도 모니터링 통로가 필요 없습니다.
+          </div>
+<pre class="tech-code" style="font-size:10.5px;">if (client.userRole === 'admin'
+ || client.userId === ownerUserId) {
+  client.ws.send(payload);
+}</pre>
+        </div>
+      </div>
+
+      <div class="tech-caption reveal-step">
+        <div class="tech-caption-label">SCOPE · TRUST</div>
+        <div class="tech-caption-text">
+          AI 가 자유롭게 일하는 만큼, <span class="hi">관찰 가능성</span> 위에서만 그 자유가 안전합니다 — 모든 prompt 가 흔적이고, 모든 세션이 들여다보입니다.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════ Slide 16: 분석 & 운영 도구 (renumbered from 17) ═══════════ -->
+  <div class="slide tech-slide" data-index="16">
+    <div class="tech-wrap">
+      <div class="slide-eyebrow"><span class="num">16</span> · INSIGHT &amp; OPS</div>
+      <h2 class="slide-title">
+        <span class="accent">분석</span>·<span class="accent">리포트</span>·<span class="accent">운영</span>까지
+      </h2>
+      <div class="tech-lede">
+        본 적도 없고 보고도 안 받는 AI 작업은 그냥 비용일 뿐 — 콘솔은 그것을 <span class="hi">읽을 수 있는 그림</span>으로 만들어줍니다.
+      </div>
+
+      <div class="tech-grid cols-3 reveal-step" id="adminOpsCards">
+        <div class="tech-card c-cyan">
+          <div class="tech-card-num">OPS · 01</div>
+          <div class="tech-card-title"><span class="accent">사용자별 활동 분석</span></div>
+          <div class="tech-card-desc">
+            <strong>NOISE_PATTERNS 필터</strong>로 테스트·짧은 요약을 걸러내고, 의미 있는 작업만 골라 사용자 카드로. 카드마다 <strong>💡 Focus</strong> — "최근에 진짜로 뭘 만들었나" 한 줄 요약.
+          </div>
+          <div class="tech-chips">
+            <span class="tech-chip">days: 7 / 30 / 90 / all</span>
+            <span class="tech-chip">project-grouped</span>
+          </div>
+        </div>
+
+        <div class="tech-card c-purple">
+          <div class="tech-card-num">OPS · 02</div>
+          <div class="tech-card-title"><span class="accent">토큰 대시보드</span></div>
+          <div class="tech-card-desc">
+            Recharts 로 세 가지 시점:
+            ① <strong>사용자별 Bar</strong>
+            ② <strong>프로젝트별 Bar</strong>
+            ③ <strong>일자별 Line (토큰·프롬프트 dual-axis)</strong>.
+            K/M 단위 자동 포매팅으로 한눈에 비교.
+          </div>
+          <div class="tech-chips">
+            <span class="tech-chip">group_by: user | project | date</span>
+            <span class="tech-chip">recharts</span>
+          </div>
+        </div>
+
+        <div class="tech-card c-amber">
+          <div class="tech-card-num">OPS · 03</div>
+          <div class="tech-card-title"><span class="accent">일일 리포트</span></div>
+          <div class="tech-card-desc">
+            scheduler 가 매일 자동 — 카드에 <strong>📄 작업요약 · 💾 커밋 수 · 🚀 배포 대기 · 🗄️ DB 마이그레이션</strong> 표시. 마이그레이션은 주황 강조 (사람 손이 필요한 항목).
+          </div>
+          <div class="tech-chips">
+            <span class="tech-chip">daily / manual</span>
+            <span class="tech-chip">conversationStats · gitActivity</span>
+            <span class="tech-chip">pendingMigrations</span>
+          </div>
+        </div>
+
+        <div class="tech-card c-pink">
+          <div class="tech-card-num">OPS · 04</div>
+          <div class="tech-card-title"><span class="accent">배포 상태 SSE</span></div>
+          <div class="tech-card-desc">
+            <code>/api/deploy/status/stream</code> 으로 <strong>실시간 스트리밍</strong>. 첫 응답에 캐시된 상태 + 백그라운드로 fresh 조회가 들어와 누적 push. 사용자는 polling 없이 라이브로 본다.
+          </div>
+          <div class="tech-chips">
+            <span class="tech-chip">EventSource</span>
+            <span class="tech-chip">cached → fresh</span>
+            <span class="tech-chip">per project</span>
+          </div>
+        </div>
+
+        <div class="tech-card c-blue">
+          <div class="tech-card-num">OPS · 05</div>
+          <div class="tech-card-title"><span class="accent">promote / sync</span></div>
+          <div class="tech-card-desc">
+            관리자 전용 두 버튼.
+            <strong>promote</strong> · 알파에서 안정화된 코드를 main 으로 승격.
+            <strong>sync</strong> · main 핫픽스를 다시 알파로 역동기화.
+            메이커가 직접 git workflow 를 자동화.
+          </div>
+          <div class="tech-chips">
+            <span class="tech-chip">alpha → main</span>
+            <span class="tech-chip">main → alpha</span>
+            <span class="tech-chip">force option</span>
+          </div>
+        </div>
+
+        <div class="tech-card c-cyan">
+          <div class="tech-card-num">OPS · 06</div>
+          <div class="tech-card-title"><span class="accent">서비스 재시작</span></div>
+          <div class="tech-card-desc">
+            "재시작" → "확인" 의 <strong>두 번 클릭 안전장치</strong>. SIGTERM 으로 graceful 종료, 진행 중 세션 정리, PM2 가 다시 띄움. UI 는 5 초 후 자동 새로고침.
+          </div>
+          <div class="tech-chips">
+            <span class="tech-chip">POST /api/system</span>
+            <span class="tech-chip">action: restart</span>
+            <span class="tech-chip">PM2 respawn</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tech-caption reveal-step">
+        <div class="tech-caption-label">OBSERVABILITY</div>
+        <div class="tech-caption-text">
+          쓴 만큼 보이고, 본 만큼 <span class="hi">조정할 수 있게</span>. 콘솔이 곧 메이커의 운전석.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════ Slide 17 · Package Roadmap ═══════════ -->
+  <div class="slide tech-slide" data-index="17">
+    <div class="tech-wrap">
+      <div class="slide-eyebrow">
+        <span class="num">17</span> · PACKAGE · ROADMAP
+        <span class="wip-tag">WIP · 앞으로 만들 것</span>
+      </div>
+      <h2 class="slide-title">
+        패키지 — <span class="accent">앞으로의 배포</span>
+      </h2>
+      <div class="tech-lede">
+        지금 <code>/package</code> 는 거의 비어 있습니다. 하지만 이 자리는 — <span class="hi">사용자가 만든 결과물을, 사용자가 직접 운영까지 밀어내는 자리</span>가 될 예정입니다.
+      </div>
+
+      <!-- 5-step package flow -->
+      <div class="pkg-flow reveal-step" id="pkgFlow">
+
+        <div class="pkg-step pks1">
+          <div class="pks-num">01</div>
+          <div class="pks-icon">📦</div>
+          <div class="pks-title">결과물 등록</div>
+          <div class="pks-desc">
+            <code>/package</code> 에서 카드로 확인 → <strong>배포 준비</strong> 마킹
+          </div>
+        </div>
+
+        <div class="pkg-arr pka1">
+          <svg viewBox="0 0 56 22">
+            <path class="track" d="M2 11 L48 11"/>
+            <path class="glow"  d="M2 11 L48 11"/>
+            <polygon class="head" points="46,5 56,11 46,17"/>
+          </svg>
+        </div>
+
+        <div class="pkg-step pks2">
+          <div class="pks-num">02</div>
+          <div class="pks-icon">🏷️</div>
+          <div class="pks-title">버전 · 노트</div>
+          <div class="pks-desc">
+            semver 태그 + 릴리즈 노트 <strong>자동 초안</strong> (claude)
+          </div>
+        </div>
+
+        <div class="pkg-arr pka2">
+          <svg viewBox="0 0 56 22">
+            <path class="track" d="M2 11 L48 11"/>
+            <path class="glow"  d="M2 11 L48 11"/>
+            <polygon class="head" points="46,5 56,11 46,17"/>
+          </svg>
+        </div>
+
+        <div class="pkg-step pks3">
+          <div class="pks-num">03</div>
+          <div class="pks-icon">🎯</div>
+          <div class="pks-title">타겟 선택</div>
+          <div class="pks-desc">
+            <code>alpha · staging · prod</code> 다중 타겟 + <strong>승인자</strong> 지정
+          </div>
+        </div>
+
+        <div class="pkg-arr pka3">
+          <svg viewBox="0 0 56 22">
+            <path class="track" d="M2 11 L48 11"/>
+            <path class="glow"  d="M2 11 L48 11"/>
+            <polygon class="head" points="46,5 56,11 46,17"/>
+          </svg>
+        </div>
+
+        <div class="pkg-step pks4">
+          <div class="pks-num">04</div>
+          <div class="pks-icon">⚙️</div>
+          <div class="pks-title">자동 빌드 · 푸시</div>
+          <div class="pks-desc">
+            번들 → 아카이브 → upload → push → <strong>파이프라인</strong>
+          </div>
+        </div>
+
+        <div class="pkg-arr pka4">
+          <svg viewBox="0 0 56 22">
+            <path class="track" d="M2 11 L48 11"/>
+            <path class="glow"  d="M2 11 L48 11"/>
+            <polygon class="head" points="46,5 56,11 46,17"/>
+          </svg>
+        </div>
+
+        <div class="pkg-step pks5">
+          <div class="pks-num">05</div>
+          <div class="pks-icon">🟢</div>
+          <div class="pks-title">라이브 · 롤백</div>
+          <div class="pks-desc">
+            단계별 <strong>SSE 라이브</strong> → 실패 시 1-click 이전 버전 복귀
+          </div>
+        </div>
+
+      </div>
+
+      <!-- TODAY vs NEXT split -->
+      <div class="pkg-split reveal-step">
+
+        <div class="pkg-col pkg-today">
+          <div class="pkg-col-head">
+            <span class="pkg-col-tag">TODAY</span>
+            이미 깔린 토대
+          </div>
+          <ul class="pkg-col-list">
+            <li><code>/package</code> SPA 마운트 — 같은 백엔드 위 별도 prefix 로 이미 서빙</li>
+            <li><code>DeployManager</code> — 30s 캐시 + git merge 자동화 + 충돌 감지</li>
+            <li><code>/api/deploy/promote · sync</code> — 알파 ↔ main 브랜치 워크플로우</li>
+            <li><code>/api/deploy/status/stream</code> — SSE 라이브 상태 (cached → fresh)</li>
+            <li><code>upload route</code> — 아카이브 추출 + 1 시간 cleanup</li>
+          </ul>
+        </div>
+
+        <div class="pkg-col pkg-next">
+          <div class="pkg-col-head">
+            <span class="pkg-col-tag tag-next">NEXT</span>
+            만들어갈 것
+          </div>
+          <ul class="pkg-col-list">
+            <li><strong>릴리즈 카드 UI</strong> — 버전 · 태그 · 노트 · 승인자 한 화면</li>
+            <li><strong>다중 타겟 매트릭스</strong> — <code>env × project</code> 동시 배포</li>
+            <li><strong>아티팩트 빌더</strong> — bundler 통합 + 세션 작업장에서 곧장 패키징</li>
+            <li><strong>릴리즈 히스토리</strong> + <strong>1-click 롤백</strong> (이전 버전으로 즉시 되돌리기)</li>
+            <li><strong>알림 · 승인</strong> 워크플로우 — Teams · 이메일 · 단계별 사인오프</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="tech-caption reveal-step">
+        <div class="tech-caption-label">VISION</div>
+        <div class="tech-caption-text">
+          사용자가 코드를 만들고 — 그 코드를 <span class="hi">사용자가 직접 운영까지 밀어낼 수 있게.</span>
+        </div>
+      </div>
     </div>
   </div>
 
